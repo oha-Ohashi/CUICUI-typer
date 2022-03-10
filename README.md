@@ -1,1 +1,3 @@
 # CUICUI-typer
+
+がんばるよ～～～
