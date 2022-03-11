@@ -13,7 +13,7 @@ def index():
 
 @app.route('/ping')
 def ping():
-    return 'mimi ping mi'
+    return 'Hello From dev1 !!'
 
 @app.route('/data')
 def data():
