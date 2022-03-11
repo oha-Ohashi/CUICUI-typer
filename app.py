@@ -17,10 +17,11 @@ def ping():
 
 @app.route('/data')
 def data():
-    name = request.args.get('name')
-    switch = request.args.get('switch')
-    payload = request.args.get('payload')
-    res = gr.generate_res(name, switch, payload)
+    param_dict = {}
+    for x in ['name', 'switch', 'enter', 'payload']:
+        param_dict[x] = request.args.get(x)
+    #print(param_dict)
+    res = gr.generate_res(param=param_dict)
     return res
 
 if __name__ == '__main__':

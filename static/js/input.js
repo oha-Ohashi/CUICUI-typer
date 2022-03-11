@@ -15,19 +15,7 @@ $(".user-input").keyup((e)=>{
 	//console.log($(".user-input").eq(Number(input_switch)).val());
 	console.log(user_inputs);
 
-	if(!input_switch){
-		if(e.key == "Enter"){
-			console.log("post: " + user_inputs[Number(input_switch)]);
-			$(".user-input").eq(Number(input_switch)).val("");
-			//user_inputs[Number(input_switch)] = "";
-		}
-	}else{
-		if(e.ctrlKey == true && e.key == "Enter"){
-			console.log("post: " + user_inputs[Number(input_switch)]);
-			$(".user-input").eq(Number(input_switch)).val("");
-			//user_inputs[Number(input_switch)] = "";
-		}
-	}
+	
 });
 $(document).keydown(function(e){
 	//console.log("key: " + e.key + "(len:"+(e.key).length+")"); 
@@ -39,19 +27,29 @@ $(document).keydown(function(e){
 	if(e.key == "Escape"){
 		disp_it();
 	}
-	/*
-	if((e.key).length == 1){
-		user_inputs[Number(pane_switch)] += e.key;
-		//console.log("user_input["+Number(pane_switch)+"]: "+ user_inputs[Number(pane_switch)]);
-		syncUserInput(Number(pane_switch));
-	}
-	if(e.key == "Enter"){
-		user_inputs[Number(pane_switch)] = "";
-		console.log("user_input["+Number(pane_switch)+"]: "+ user_inputs[Number(pane_switch)]);
-		syncUserInput(Number(pane_switch));
-	}*/
 
+	///////////////////////確定/////////////////////////
+	if(!input_switch){
+		if(e.key == "Enter"){
+			console.log("post: " + user_inputs[Number(input_switch)]);
+			disp_it({
+				name: user_name,
+				switch: input_switch,
+				enter: true,
+				payload: user_inputs[Number(input_switch)]
+			});
+			$(".user-input").eq(Number(input_switch)).val("");
+			//user_inputs[Number(input_switch)] = "";
+		}
+	}else{
+		if(e.ctrlKey == true && e.key == "Enter"){
+			console.log("post: " + user_inputs[Number(input_switch)]);
+			$(".user-input").eq(Number(input_switch)).val("");
+			//user_inputs[Number(input_switch)] = "";
+		}
+	}
 });
+/////////////////////////////////////////
 $(".user-input").eq(0).click((e)=>{
 	input_switch = false;
 });
