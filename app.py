@@ -1,7 +1,7 @@
 from flask import Flask, request
 from flask import render_template
 import time
-import generate_res as gr
+from . import generate_res as gr
 
 app = Flask(__name__)
 
