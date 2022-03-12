@@ -14,17 +14,17 @@ body{
 .green-name{
 	color: #67F86F;
 }
-/*
+
 #p1{
-	background-color: #f17a7a;
+	background-color: #f17a7a31;
 }
 #p2{
-	background-color: #faffad;
+	background-color: #faffad32;
 }
 #p3{
-	background-color: #b0f5bb;
+	background-color: #b0f5bb32;
 }
-*/
+
 .user-input{
 	color: #eee;
 	background-color: #3f3f3f;
@@ -33,6 +33,7 @@ body{
 	border: none;
 	outline: none;
 }
+.input-shita{width: 100%;}
 
 
 ::-webkit-scrollbar{
