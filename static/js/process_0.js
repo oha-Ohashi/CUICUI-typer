@@ -8,9 +8,9 @@ $(() => {
 const help_text = [
 	[
 		"名前 `名前`: ユーザーネームを`名前`に設定",
+		"一覧: 現在開いている対戦インスタンスを表示",
 		"開く `名前`: 対戦インスタンス`名前`を作成",
-		"開く `名前` `password`: パーワード付きで作成",
-		"一覧: 現在開いている対戦インスタンスを表示"
+		"入る `名前`: 対戦インスタンス`名前`に入室する"
 	]
 ];
 function process_0(input){
@@ -27,11 +27,21 @@ function process_0(input){
 		}else{
 			p0_respond("第2引数にお名前を入力してください。")
 		}
+	}else if(split_input[0] == "一覧"){
+		var ajax_res = myajax({arg1:"view"});
+		p0_respond(ajax_res);
+	}else if(split_input[0] == "開く"){
+		if(split_input[1] !== undefined && split_input[1] !== ""){
+			var ajax_res = myajax({arg1:"create", arg2: split_input[1]});
+			p0_respond(ajax_res);
+		}else{
+			p0_respond("第2引数にインスタンス名を入力してください。")
+		}
 	}else if(split_input[0] == "rem"){
 		localStorage.removeItem("name_CUICUI");
 		p0_respond("removed name");
 	}else{
-		p0_respond("");
+		p0_respond("そのようなコマンドはありません。");
 	}
 }
 function dump_help(which){
@@ -44,6 +54,18 @@ function dump_help(which){
 	return res;
 }
  
+function myajax(paras){
+	var res = $.ajax(
+		{
+			url: "./cuicui_command",
+			type: "GET",
+			data: paras,
+			async: false
+		}
+	).responseText
+	return res;
+}
+
 function p0_respond(arg_text){
 	var response_div = $('<div>'+arg_text+'</div>');
 	var input_div = $('<div>');

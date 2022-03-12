@@ -1,11 +1,24 @@
 from flask import Flask, request
 from flask import render_template
+from .python_scripts import cuicui_command as cc
 
 app = Flask(__name__)
 
 @app.route('/')
+@app.route('/index')
 def index():
+    return "インデックスは今度つくるよ。"
+
+@app.route('/cuicui')
+def cuicui():
     return render_template('index.html', title='Welcome')
+
+@app.route('/cuicui_command')
+def cuicui_command():
+    param_list = []
+    for x in ['arg1', 'arg2', 'arg3', 'arg4']:
+        param_list.append(request.args.get(x))
+    return cc.generate_res(param=param_list)
 
 @app.route('/ping')
 def ping():
