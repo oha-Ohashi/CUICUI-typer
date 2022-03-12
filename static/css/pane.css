@@ -1,66 +1,28 @@
-:root{
-    --unit:80px;
-}
 body{
     font-family: 'Noto Sans JP', sans-serif;
     background-color: #14282c;
 }
-#game-window{
-    margin: 0 auto;
-    background-color: #14282c;
-    width: calc(16 * var(--unit));
-    height: calc(9 * var(--unit));
-    position: relative;
+.container{
+	background-color: aqua;
 }
-
 .pane{
-    padding: 10px;
-    background-color: aquamarine;
-    position: absolute;
+	/*height: 300px;*/
+	padding: 10px;
 }
-.ab{position: absolute;}
-.pane:nth-child(1){
-    height: calc(1.0 * var(--unit));
-    width: calc(16 * var(--unit));
-    background-color: bisque;
+#p1{
+	background-color: #f17a7a;
 }
-.pane:nth-child(2){
-    top: calc(1.0 * var(--unit));
-    height: calc(8.0 * var(--unit));
-    width: calc(16* 1/4 * var(--unit));
-    background-color: #c4ffe2;
+#p2{
+	background-color: #faffad;
 }
-.pane:nth-child(3){
-    top: calc(1.0 * var(--unit));
-    left: calc(16* 1/4 * var(--unit));
-    height: calc(1.0 * var(--unit));
-    width: calc(16* 3/4 * var(--unit));
-    background-color: #c4ecff;
-}
-.pane:nth-child(4){
-    top: calc(2.0 * var(--unit));
-    left: calc(16* 1/4 * var(--unit));
-    height: calc(7.0 * var(--unit));
-    width: calc(16* 3/4 /2 * var(--unit));
-    background-color: #e4c4ff;
-}
-.pane:nth-child(5){
-    top: calc(2.0 * var(--unit));
-    left: calc(((16* 1/4) + (16* 3/4 /2))  * var(--unit));
-    height: calc(7.0 * var(--unit));
-    width: calc(16* 3/4 /2 * var(--unit));
-    background-color: #ffc4d8;
+#p3{
+	background-color: #b0f5bb;
 }
 
-.p1:nth-child(1){
-    font-size: 36px;
-}
-.p1:nth-child(2){
-    font-size: 15px;
-    right: 18px;
-}
-.p1:nth-child(3){
-    font-size: 28px;
-    top: 28px;
-    right: 18px;
+.user-input{
+	background-color: aqua;
+	caret-color: pink;
+	/*caret-shape: block;*/
+	border: none;
+	outline: none;
 }
