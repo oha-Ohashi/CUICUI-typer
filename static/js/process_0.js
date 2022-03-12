@@ -9,7 +9,7 @@ const help_text = [
 	[
 		"名前 `名前`: ユーザーネームを`名前`に設定",
 		"一覧: 現在開いている対戦インスタンスを表示",
-		"開く `名前`: 対戦インスタンス`名前`を作成",
+		"作る `名前`: 対戦インスタンス`名前`を作成",
 		"入る `名前`: 対戦インスタンス`名前`に入室する"
 	]
 ];
@@ -30,9 +30,16 @@ function process_0(input){
 	}else if(split_input[0] == "一覧"){
 		var ajax_res = myajax({arg1:"view"});
 		p0_respond(ajax_res);
-	}else if(split_input[0] == "開く"){
+	}else if(split_input[0] == "作る"){
 		if(split_input[1] !== undefined && split_input[1] !== ""){
 			var ajax_res = myajax({arg1:"create", arg2: split_input[1]});
+			p0_respond(ajax_res);
+		}else{
+			p0_respond("第2引数にインスタンス名を入力してください。")
+		}
+	}else if(split_input[0] == "入る"){
+		if(split_input[1] !== undefined && split_input[1] !== ""){
+			var ajax_res = myajax({arg1:"join", arg2: split_input[1]});
 			p0_respond(ajax_res);
 		}else{
 			p0_respond("第2引数にインスタンス名を入力してください。")
