@@ -22,5 +22,6 @@ function resize_tate(arr){
 	$(".pane").each(function(index){
 		//console.log(index);
 		$(this).height(h_percent[index]/100 * w_height + "px");
+		//$(this).css("overflow", "scroll");
 	});
 }
