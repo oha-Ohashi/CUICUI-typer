@@ -5,20 +5,14 @@ $(() => {
 		p0_respond("ようこそ、" + localStorage.getItem("name_CUICUI"));
 	}
 });
-const help_text = [
-	[
-		"名前 `名前`: ユーザーネームを`名前`に設定",
-		"一覧: 現在開いている対戦インスタンスを表示",
-		"作る `名前`: 対戦インスタンス`名前`を作成",
-		"入る `名前`: 対戦インスタンス`名前`に入室する"
-	]
-];
+
 function process_0(input){
 	split_input = input.split(" ");
 	console.log("process_0:" + split_input);
 	if(split_input[0] == "助けて"){
-		var help_text = dump_help(0);
-		p0_respond(help_text);
+		p0_respond(dump_help(0));
+	}else if(split_input[0] == "助けてい"){
+		p0_respond(dump_help(1));
 	}else if(split_input[0] == "名前"){
 		console.log(split_input[1]);
 		if(split_input[1] !== undefined && split_input[1] !== ""){
@@ -62,6 +56,8 @@ function process_0(input){
 		}
 	}else if (split_input[0] == "test"){
 		p0_respond(myajax({arg1:"test"}));
+	}else if (split_input[0] == "clear"){
+		p0_respond(myajax({arg1:"clear"}));
 	}else if(split_input[0] == "rem"){
 		localStorage.removeItem("name_CUICUI");
 		p0_respond("removed name");
@@ -69,6 +65,18 @@ function process_0(input){
 		p0_respond("そのようなコマンドはありません。");
 	}
 }
+const help_text = [
+	[
+		"名前 `名前`: ユーザーネームを`名前`に設定",
+		"一覧: 現在開いている対戦インスタンスを表示",
+		"作る `名前`: 対戦インスタンス`名前`を作成",
+		"入る `名前`: 対戦インスタンス`名前`に入室する",
+		"助けてい: インスタンスの設定に関するコマンドを表示"
+	],
+	[
+		"開発中です……"
+	]
+];
 function dump_help(which){
 	var help = help_text[which];
 	var res = "<ul>";

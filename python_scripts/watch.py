@@ -1,6 +1,6 @@
 import glob, os
 import time, threading
-import myjson
+import myjson, game
 
 class Watcher:
 	def __init__(self, itc_name):
@@ -15,13 +15,9 @@ class Watcher:
 			itc_dict_now = myjson.json_to_dict(self.itc_path)
 			if(itc_dict_now != itc_dict_prev):
 				time.sleep(0.1)
-				game = Game(itc_dict_now)
+				game.anychange(itc_dict_now)
 				#print(itc_dict_now)
 			itc_dict_prev = itc_dict_now
-
-class Game:
-	def __init__(self, itc_dict):
-		print(itc_dict)
 
 def get_instances():
 	res = []
@@ -51,3 +47,5 @@ if __name__ == '__main__':
 				for item in stop_them:
 					del watchers[item]
 		list_prev = list_now
+		#time.sleep(0.1)
+		#print(".")

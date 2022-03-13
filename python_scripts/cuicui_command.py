@@ -1,4 +1,5 @@
 import json
+import time
 import glob, os, shutil
 from . import myjson
 def generate_res(param):
@@ -28,6 +29,7 @@ def generate_res(param):
 				'./cuicui/data/instances/'+ param[1] +'.json'
 			)
 			res = "対戦インスタンス `"+ param[1] +" `が無事開かれました。"
+			res += "<br>5分間インスタンス情報の更新がない場合、インスタンスは自動的に削除されます。"
 		else:
 			res = "すでに同名のインスタンスがあります。"
 
@@ -45,6 +47,8 @@ def generate_res(param):
 			
 	if param[0] == "test":
 		res = "(サーバー)これはてすとだよ"
+	if param[0] == "clear":
+		clear_instances()
 
 	return res
 
@@ -56,3 +60,14 @@ def get_instances():
 		res.append(basename_without_ext)
 	#print(res)
 	return res
+
+def clear_instances():
+	itc_list = get_instances()
+	itc_list.remove("default")
+	for item in itc_list:
+		itc_path = myjson.path_itc(item)
+		itc_dict = myjson.json_to_dict(itc_path)
+		itc_dict['alive'] = False
+		myjson.dict_to_json(itc_path, itc_dict)
+		time.sleep(0.5)
+		os.remove(itc_path)
