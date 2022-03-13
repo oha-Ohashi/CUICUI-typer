@@ -41,4 +41,5 @@ function p1_respond(odai_text, disp_text){
 	$("#p3").append(input_div);
 	$("#p3").append(disp_div);
 	input_div.focus();
+	input_switch = !input_switch;
 }
