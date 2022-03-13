@@ -43,7 +43,6 @@ elms_input[1].keydown((e) => {
 	if(e.ctrlKey == true && e.key == "Enter"){
 		var input = elms_input[1].last().val();
 		elms_input[1].last().val("");
-		//var input = $(this).eq(0).val();
 		process_1(input);
 	}
 });

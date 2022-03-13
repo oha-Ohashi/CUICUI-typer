@@ -1,5 +1,6 @@
 import json
 import glob, os, shutil
+from . import myjson
 def generate_res(param):
 	res = "default response."
 	# パラメーターを列挙
@@ -33,10 +34,17 @@ def generate_res(param):
 	if param[0] == "join":
 		itc_list = get_instances()
 		if param[1] in itc_list:
-			res = param[1] + "に入りました。"
+			itc_path = myjson.path_itc(param[1])
+			itc_dict = myjson.json_to_dict(itc_path)
+			itc_dict['players'][param[2]] = json.load(open('./cuicui/data/player.json', 'r', encoding='utf-8'))
+			#print(itc_dict)
+			myjson.dict_to_json(itc_path, itc_dict)
+			res = "[成功]インスタンス`"+param[1]+"`に参加しました。"
 		else:
 			res = param[1] + ": そのようなインスタンスはありません。"
 			
+	if param[0] == "test":
+		res = "(サーバー)これはてすとだよ"
 
 	return res
 

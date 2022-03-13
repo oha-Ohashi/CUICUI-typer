@@ -22,8 +22,12 @@ function process_0(input){
 	}else if(split_input[0] == "名前"){
 		console.log(split_input[1]);
 		if(split_input[1] !== undefined && split_input[1] !== ""){
-			localStorage.setItem("name_CUICUI", split_input[1]);
-			p0_respond("お名前が登録されました。");
+			if(split_input[1].length <= 16){
+				localStorage.setItem("name_CUICUI", split_input[1]);
+				p0_respond("お名前が登録されました。");
+			}else{
+				p0_respond("お名前は16文字以内でお願いします。");
+			}
 		}else{
 			p0_respond("第2引数にお名前を入力してください。")
 		}
@@ -32,18 +36,32 @@ function process_0(input){
 		p0_respond(ajax_res);
 	}else if(split_input[0] == "作る"){
 		if(split_input[1] !== undefined && split_input[1] !== ""){
-			var ajax_res = myajax({arg1:"create", arg2: split_input[1]});
-			p0_respond(ajax_res);
+			if(split_input[1].length <= 16){
+				var ajax_res = myajax({arg1:"create", arg2: split_input[1]});
+				p0_respond(ajax_res);
+			}else{
+				p0_respond("インスタンス名は16文字以内でお願いします。")
+			}
 		}else{
 			p0_respond("第2引数にインスタンス名を入力してください。")
 		}
 	}else if(split_input[0] == "入る"){
 		if(split_input[1] !== undefined && split_input[1] !== ""){
-			var ajax_res = myajax({arg1:"join", arg2: split_input[1]});
-			p0_respond(ajax_res);
+			var ajax_res = myajax({
+				arg1:"join", arg2: split_input[1], 
+				arg3: localStorage.getItem("name_CUICUI")
+			});
+			if(ajax_res.includes("[成功]")){
+				p0_respond(ajax_res);
+				shita_start();
+			}else{
+				p0_respond("なんか失敗しました。");
+			}
 		}else{
 			p0_respond("第2引数にインスタンス名を入力してください。")
 		}
+	}else if (split_input[0] == "test"){
+		p0_respond(myajax({arg1:"test"}));
 	}else if(split_input[0] == "rem"){
 		localStorage.removeItem("name_CUICUI");
 		p0_respond("removed name");
