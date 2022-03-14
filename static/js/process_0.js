@@ -64,11 +64,20 @@ function process_0(input){
 		if(localStorage.getItem("instance") !== 'null'){
 			if(split_input[1] !== undefined && 
 				arr_10lv.indexOf(Number(split_input[1])) !== -1 ){
-				res = add_bot(Number(split_input[1]));
-				p0_respond(res);
+					res = add_bot(Number(split_input[1]));
+					p0_respond(res);
 			}else if(split_input[1] !== undefined && 
 				arr_3blends.indexOf(split_input[1]) !== -1 ){
-				p0_respond("botが4個体追加されました("+split_input[1]+")");
+					res = ""
+					var omakase_map = {
+						"弱": [1,2,3],
+						"中": [4,5,6],
+						"強": [8,9,10]
+					}
+					omakase_map[split_input[1]].forEach((e) => {
+						res += add_bot(e);
+					});
+					p0_respond(res);
 			}else{
 				p0_respond("コマンドが不正です。");
 			}

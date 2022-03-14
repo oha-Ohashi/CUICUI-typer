@@ -1,12 +1,14 @@
 import time
 import myjson
+import random
 
 class Bot():
 	def __init__(self, path, bot_name, bot_level):
 		self.path = path
 		self.bot_name = bot_name
-		self.bot_level = int(bot_level)
-		print(type(self.bot_level))
+		self.bot_level = int(bot_level) - 1
+		self.delay_head = [7,7,6,5,4, 3,2,2,2,2]
+		self.delay_mean = [4,3,3,2,2,  1.5,1.0,0.7,0.5,0.3]
 
 	def get_player_dict(self):
 		itc_dict = myjson.json_to_dict(self.path)
@@ -35,18 +37,22 @@ class Bot():
 
 	def bot_type(self, string):
 		wip = ""
+		time.sleep(self.delay_head[self.bot_level])
 		for c in string:
 			wip += c
 			print(c)
 			pl_dict = self.get_player_dict()
 			pl_dict['wip'] = wip
 			self.put_player_dict(pl_dict)
-			time.sleep(0.5)
-		'''
-		pl_dict = self.get_player_dict()
-		pl_dict['local-phase'] += 1
-		self.put_player_dict(pl_dict)
-		'''
+			time.sleep(self.randomize(
+				self.delay_mean[self.bot_level]
+			))
+	def randomize(self, span):
+		proportion = 0.5
+		minimum = span - (span * proportion)
+		maximum = span + (span * proportion)
+		return random.uniform(minimum, maximum)
+
 
 def bot_life(path, bot_name, bot_level):
 	bot = Bot(path, bot_name, bot_level)

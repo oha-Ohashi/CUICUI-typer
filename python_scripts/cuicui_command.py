@@ -33,7 +33,7 @@ def generate_res(param):
 				'./cuicui/data/instances/'+ param[1] +'.json'
 			)
 			res = "対戦インスタンス `"+ param[1] +" `が無事開かれました。"
-			res += "<br>5分間インスタンス情報の更新がない場合、インスタンスは自動的に削除されます。"
+			res += "<br>1分間インスタンス情報の更新がない場合、インスタンスは自動的に削除されます。"
 		else:
 			res = "すでに同名のインスタンスがあります。"
 
@@ -65,7 +65,8 @@ def generate_res(param):
 		bot["level"] = param[2]
 		itc_dict["players"].append(bot)
 		myjson.dict_to_json(itc_path, itc_dict)
-		res = bot_name + "が参加しました。"
+		res = bot_name + "が参加しました。<br>"
+		time.sleep(0.5)
 
 	if param[0] == "wip":	#1:instance 2:name 3:input
 		player_property_update(param[1], param[2], ["wip", param[3]])
