@@ -35,9 +35,7 @@ function p1_respond(odai_text, disp_text){
 	input_div.keydown((e) => {
 		/*
 		if(e.ctrlKey == true && e.key == "Enter"){
-			var input = input_div.val();
-			input_div.val("");
-			process_1(input);
+					}
 		}
 		*/
 	});
@@ -50,6 +48,12 @@ function p1_respond(odai_text, disp_text){
 			arg4: input
 		});
 		console.log("途中: "+ input);
+		console.log("おだい: "+ $("#odai").text());
+
+		if(e.key === "Enter"){
+			console.log("enta--");
+			input_div.val("");
+		}
 	});
 
 	var disp_div = $('<div id=disp>'+disp_text+'</div>')
@@ -68,10 +72,10 @@ function p1_sync(){
 		arg2: localStorage.getItem("instance"), 
 		arg3: localStorage.getItem("name")
 	});
-	console.log(res);
+	//console.log(res);
 	var odai_text = res.split(',')[0];
 	var disp_text = res.split(',')[1];
-	console.log("sync!");
+	//console.log("sync!");
 	var odai_div = $('<div id="odai">'+odai_text+'</div>');
 	var disp_div = $('<div id=disp>'+disp_text+'</div>')
 	$("#odai").html(odai_div);
