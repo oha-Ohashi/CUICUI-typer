@@ -8,11 +8,11 @@ app.config["JSON_AS_ASCII"] = False
 @app.route('/')
 @app.route('/index')
 def index():
-    return "インデックスは今度つくるよ。"
+    return render_template('index.html', title='Welcome')
 
 @app.route('/cuicui')
 def cuicui():
-    return render_template('index.html', title='Welcome')
+    return render_template('cuicui.html', title='Welcome')
 
 @app.route('/cuicui_command')
 def cuicui_command():

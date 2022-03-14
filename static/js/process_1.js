@@ -24,6 +24,7 @@ function shita_start(){
 	}, 100);
 }
 
+let sound = new Audio("https://raw.githubusercontent.com/Yousuke777/sound/main/kansei.mp3");
 
 function p1_respond(odai_text, disp_text){
 	var odai_div = $('<div id="odai">'+odai_text+'</div>');

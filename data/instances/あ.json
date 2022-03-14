@@ -14,6 +14,13 @@
       "local-phase": 2,
       "score": 100,
       "wip": ""
+    },
+    {
+      "name": "シャオミ",
+      "ready": false,
+      "local-phase": 0,
+      "score": 0,
+      "wip": ""
     }
   ]
 }
