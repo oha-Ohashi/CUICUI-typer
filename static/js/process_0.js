@@ -10,7 +10,7 @@ $(() => {
 });
 
 function process_0(input){
-	split_input = input.split(" ");
+	split_input = input.replaceAll("　", " ").split(" ");
 	console.log("process_0:" + split_input);
 	if(split_input[0] == "助けて"){
 		p0_respond(dump_help(0));
