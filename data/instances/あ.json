@@ -6,50 +6,41 @@
     "かきくけこ",
     "[対戦終了]お疲れさまでした。<br>F5キーで退出してください。"
   ],
-  "global-phase": 0,
+  "global-phase": 3,
   "players": [
     {
       "name": "コハシ",
       "bot": false,
-      "local-phase": 0,
-      "score": 0,
-      "wip": ""
+      "local-phase": 3,
+      "score": 100,
+      "wip": "かきくけこ"
     },
     {
-      "name": "bot-Lv1#64735",
+      "name": "bot-Lv1#43507",
       "bot": false,
       "active": true,
       "level": "1",
-      "local-phase": 0,
-      "score": 0,
-      "wip": ""
+      "local-phase": 3,
+      "score": 150,
+      "wip": "かきくけこ"
     },
     {
-      "name": "bot-Lv1#68311",
+      "name": "bot-Lv1#43727",
       "bot": false,
       "active": false,
       "level": "1",
-      "local-phase": 0,
-      "score": 0,
-      "wip": ""
+      "local-phase": 3,
+      "score": 150,
+      "wip": "かきくけこ"
     },
     {
-      "name": "bot-Lv1#17145",
+      "name": "bot-Lv1#44067",
       "bot": false,
-      "active": true,
+      "active": false,
       "level": "1",
-      "local-phase": 0,
-      "score": 0,
-      "wip": ""
-    },
-    {
-      "name": "bot-Lv1#38438",
-      "bot": false,
-      "active": true,
-      "level": "1",
-      "local-phase": 0,
-      "score": 0,
-      "wip": ""
+      "local-phase": 3,
+      "score": 100,
+      "wip": "かきくけこ"
     }
   ]
 }

@@ -26,14 +26,10 @@ def give_some_point(itc_dict, which_one_passed):
 	local_phases = []
 	for i, p in enumerate(itc_dict['players']):
 		local_phases.append(p['local-phase'])
-	print(local_phases)
+	#print(local_phases)
 	position = local_phases.count(local_phases[which_one_passed])
-	print("position: ", position)
-	'''
-	#global-phase上げ
-	if position >= len(itc_dict['players']):
-		itc_dict['global-phase'] += 1
-	'''
+	#print("position: ", position)
+
 	#ポイント加算
 	point_list = [0,100,50]
 	if position > 2:  #メンバーが多かった時に切る
@@ -57,7 +53,7 @@ def detect_bot(itc_dict, path):
 			print(p['name'] + " emerged!")
 			thread = threading.Thread(
 				target=bot.bot_life, 
-				args=(path, p['name'],)
+				args=(path, p['name'], p['level'],)
 			)
 			thread.start()
 			# botフラグを切る
