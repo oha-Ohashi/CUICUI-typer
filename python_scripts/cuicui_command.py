@@ -51,6 +51,9 @@ def generate_res(param):
 
 	if param[0] == "wip":	#1:instance 2:name 3:input
 		player_property_update(param[1], param[2], ["wip", param[3]])
+	if param[0] == "sync":	#1:instance 2:name
+		li = create_odai_and_disp(param[1], param[2])
+		res = ','.join(li)
 			
 	if param[0] == "test":
 		res = "(サーバー)これはてすとだよ"
@@ -92,7 +95,27 @@ def player_property_update(instance, name, key_and_value):
 			itc_path = myjson.path_itc(instance)
 			itc_dict = myjson.json_to_dict(itc_path)
 			for i, p in enumerate(itc_dict['players']):
-				itc_dict['players'][i][key_and_value[0]] = key_and_value[1]			
+				if p['name'] == name:
+					itc_dict['players'][i][key_and_value[0]] = key_and_value[1]			
 
 			myjson.dict_to_json(itc_path, itc_dict)
 	print(key_and_value)
+
+def create_odai_and_disp(instance, name):
+	res = ["<br>", "<br>"]
+	for item in get_instances():
+		if item == instance:
+			itc_path = myjson.path_itc(instance)
+			itc_dict = myjson.json_to_dict(itc_path)
+			res[1] += create_disp(itc_dict)
+			for i, p in enumerate(itc_dict['players']):
+				if p['name'] == name:
+					res[0] += p['odai']
+	return res
+
+def create_disp(itc_dict):
+	res = ""
+	for i, p in enumerate(itc_dict['players']):
+		res += str(p['score']) + ": " + p['name'] + "<br>"
+		res += p['wip'] + "<br>"
+	return res
