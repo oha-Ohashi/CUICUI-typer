@@ -33,11 +33,7 @@ function p1_respond(odai_text, disp_text){
 		input_switch = true;
 	});
 	input_div.keydown((e) => {
-		/*
-		if(e.ctrlKey == true && e.key == "Enter"){
-					}
-		}
-		*/
+		console.log("た");
 	});
 	input_div.keyup((e) => {
 		var input = input_div.val();
@@ -47,8 +43,11 @@ function p1_respond(odai_text, disp_text){
 			arg3: localStorage.getItem("name"), 
 			arg4: input
 		});
-		console.log("途中: "+ input);
-		console.log("おだい: "+ $("#odai").text());
+		//console.log("途中: "+ input);
+		//console.log("おだい: "+ $("#odai").text());
+		if (input == $("#odai").text()){
+			console.log("ピコーン");
+		}
 
 		if(e.key === "Enter"){
 			console.log("enta--");
