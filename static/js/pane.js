@@ -12,7 +12,7 @@ function size_sync(){
 	w_height = $(window).height();
 	//console.log("width: "+w_width+"height: "+w_height);
 	if(w_width < 768){
-		resize_tate([10, 35, 45]);
+		resize_tate([10, 30, 50]);
 	}else{
 		resize_tate([10, 80, 80]);
 	}

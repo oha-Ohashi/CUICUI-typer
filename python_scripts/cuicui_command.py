@@ -1,7 +1,7 @@
 import json
 import time
 import glob, os, shutil
-from . import myjson, game
+from . import myjson
 def generate_res(param):
 	res = "default response."
 	# パラメーターを列挙
@@ -102,7 +102,7 @@ def player_property_update(instance, name, key_and_value):
 	print(key_and_value)
 
 def create_odai_and_disp(instance, name):
-	res = ["<br>", "<br>"]
+	res = ["<br>", "<br><br><br>"]
 	for item in get_instances():
 		if item == instance:
 			itc_path = myjson.path_itc(instance)
@@ -110,12 +110,13 @@ def create_odai_and_disp(instance, name):
 			res[1] += create_disp(itc_dict)
 			for i, p in enumerate(itc_dict['players']):
 				if p['name'] == name:
-					res[0] += p['odai']
+					res[0] += itc_dict['thread'][itc_dict['global-phase']]
 	return res
 
 def create_disp(itc_dict):
 	res = ""
 	for i, p in enumerate(itc_dict['players']):
-		res += str(p['score']) + ": " + p['name'] + "<br>"
-		res += p['wip'] + "<br>"
+		#res += p['name'] + ": score " + str(p['score']) + "<br>"
+		res += "score "+  str(p['score']) + ": " + p['name'] + "<br>"
+		res += "&ensp;" + p['wip'] + "<br>"
 	return res

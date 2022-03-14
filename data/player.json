@@ -1,7 +1,7 @@
 {
 	"name": "",
 	"ready": false,
-	"odai": "｢準備完了｣とタイプしてそのままお待ちください。",
+	"local-phase": 0,
 	"score": 0,
 	"wip": ""
 }
