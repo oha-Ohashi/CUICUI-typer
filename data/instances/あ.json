@@ -1,0 +1,33 @@
+{
+  "alive": true,
+  "thread": [
+    "｢準備完了｣とタイプしてそのままお待ちください。",
+    "あいうえお",
+    "かきくけこ",
+    "[対戦終了]お疲れさまでした。"
+  ],
+  "global-phase": 3,
+  "players": [
+    {
+      "name": "コハシ",
+      "ready": false,
+      "local-phase": 3,
+      "score": 150,
+      "wip": "[対戦終了]お疲れさまでした。"
+    },
+    {
+      "name": "sk",
+      "ready": false,
+      "local-phase": 3,
+      "score": 150,
+      "wip": ""
+    },
+    {
+      "name": "だいな",
+      "ready": false,
+      "local-phase": 3,
+      "score": 100,
+      "wip": ""
+    }
+  ]
+}

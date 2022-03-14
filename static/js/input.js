@@ -24,6 +24,16 @@ $(document).keyup(function(e){
 		$(".input-shita")
 	];
 });
+
+$("#p2").click((e) => {
+	input_switch = false;
+	$(".input-ue").last().focus();
+});
+$("#p3").click((e) => {
+	input_switch = true;
+	$(".input-shita").last().focus();
+});
+
 elms_input[0].last().click((e)=>{
 	input_switch = false;
 });
@@ -43,7 +53,6 @@ elms_input[1].keydown((e) => {
 	if(e.ctrlKey == true && e.key == "Enter"){
 		var input = elms_input[1].last().val();
 		elms_input[1].last().val("");
-		//var input = $(this).eq(0).val();
 		process_1(input);
 	}
 });
