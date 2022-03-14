@@ -64,7 +64,8 @@ function process_0(input){
 		if(localStorage.getItem("instance") !== 'null'){
 			if(split_input[1] !== undefined && 
 				arr_10lv.indexOf(Number(split_input[1])) !== -1 ){
-				p0_respond("bot(難易度: "+Number(split_input[1])+") がインスタンスに参加しました。");
+				res = add_bot(Number(split_input[1]));
+				p0_respond(res);
 			}else if(split_input[1] !== undefined && 
 				arr_3blends.indexOf(split_input[1]) !== -1 ){
 				p0_respond("botが4個体追加されました("+split_input[1]+")");
@@ -111,6 +112,13 @@ function dump_help(which){
 	return res;
 }
  
+function add_bot(level){
+	return myajax({
+		arg1:"bot", 
+		arg2: localStorage.getItem("instance"), 
+		arg3: level
+	});
+}
 
 function myajax(paras){
 	var res = $.ajax(

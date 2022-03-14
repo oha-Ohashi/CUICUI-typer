@@ -3,7 +3,7 @@ import time
 import glob, os, shutil
 from . import myjson
 def generate_res(param):
-	res = "default response."
+	res = "(server)default response."
 	# パラメーターを列挙
 	for i in range(len(param)):
 		print(i, end=":")
@@ -48,6 +48,17 @@ def generate_res(param):
 				res = "[成功]インスタンス`"+param[1]+"`に移動しました。<br>`助けてい`:インスタンス操作のコマンドを見る"
 		else:
 			res = param[1] + ": そのようなインスタンスはありません。"
+	
+	if param[0] == "bot": # 1:instance 2:level
+		itc_path = myjson.path_itc(param[1])
+		itc_dict = myjson.json_to_dict(itc_path)
+		bot = myjson.json_to_dict('./cuicui/data/bot.json')
+		bot_name = "bot-Lv" + str(param[2])
+		bot["name"] = bot_name
+		bot["level"] = param[2]
+		itc_dict["players"].append(bot)
+		myjson.dict_to_json(itc_path, itc_dict)
+		res = bot_name + "が参加しました。"
 
 	if param[0] == "wip":	#1:instance 2:name 3:input
 		player_property_update(param[1], param[2], ["wip", param[3]])

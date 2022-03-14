@@ -10,6 +10,47 @@
   "players": [
     {
       "name": "コハシ",
+      "bot": false,
+      "local-phase": 0,
+      "score": 0,
+      "wip": ""
+    },
+    {
+      "name": "bot-Lv1",
+      "bot": true,
+      "level": "1",
+      "local-phase": 0,
+      "score": 0,
+      "wip": ""
+    },
+    {
+      "name": "bot-Lv1",
+      "bot": true,
+      "level": "1",
+      "local-phase": 0,
+      "score": 0,
+      "wip": ""
+    },
+    {
+      "name": "bot-Lv10",
+      "bot": true,
+      "level": "10",
+      "local-phase": 0,
+      "score": 0,
+      "wip": ""
+    },
+    {
+      "name": "bot-Lv9",
+      "bot": true,
+      "level": "9",
+      "local-phase": 0,
+      "score": 0,
+      "wip": ""
+    },
+    {
+      "name": "bot-Lv8",
+      "bot": true,
+      "level": "8",
       "local-phase": 0,
       "score": 0,
       "wip": ""
