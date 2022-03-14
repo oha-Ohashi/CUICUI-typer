@@ -6,18 +6,10 @@
     "かきくけこ",
     "[対戦終了]お疲れさまでした。<br>F5キーで退出してください。"
   ],
-  "global-phase": 2,
+  "global-phase": 0,
   "players": [
     {
       "name": "コハシ",
-      "ready": false,
-      "local-phase": 2,
-      "score": 100,
-      "wip": ""
-    },
-    {
-      "name": "シャオミ",
-      "ready": false,
       "local-phase": 0,
       "score": 0,
       "wip": ""

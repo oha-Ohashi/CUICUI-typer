@@ -24,7 +24,7 @@ function shita_start(){
 	}, 100);
 }
 
-let sound = new Audio("https://raw.githubusercontent.com/Yousuke777/sound/main/kansei.mp3");
+//let sound_enter = new Audio("https://github.com/oha-Ohashi/cuicui/blob/main/sound/enter1.mp3?raw=true");
 
 function p1_respond(odai_text, disp_text){
 	var odai_div = $('<div id="odai">'+odai_text+'</div>');
@@ -48,6 +48,7 @@ function p1_respond(odai_text, disp_text){
 		//console.log("おだい: "+ $("#odai").text());
 		if (input == $("#odai").text()){
 			console.log("ピコーン");
+			//sound_enter.play();
 		}
 
 		if(e.key === "Enter"){
@@ -62,8 +63,8 @@ function p1_respond(odai_text, disp_text){
 	$("#p3").append(odai_div);
 	$("#p3").append(input_div);
 	$("#p3").append(disp_div);
-	input_div.focus();
-	input_switch = !input_switch;
+	//input_div.focus();
+	//input_switch = !input_switch;
 }
 
 function p1_sync(){

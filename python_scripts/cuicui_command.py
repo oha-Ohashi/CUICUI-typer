@@ -43,9 +43,9 @@ def generate_res(param):
 				player["name"] = param[2]
 				itc_dict['players'].append(player)
 				myjson.dict_to_json(itc_path, itc_dict)
-				res = "[成功]インスタンス`"+param[1]+"`に新しく参加しました。"
+				res = "[成功]インスタンス`"+param[1]+"`に新しく参加しました。<br>`助けてい`:インスタンス操作のコマンドを見る"
 			else:
-				res = "[成功]インスタンス`"+param[1]+"`に移動しました。"
+				res = "[成功]インスタンス`"+param[1]+"`に移動しました。<br>`助けてい`:インスタンス操作のコマンドを見る"
 		else:
 			res = param[1] + ": そのようなインスタンスはありません。"
 
