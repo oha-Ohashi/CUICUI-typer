@@ -35,7 +35,7 @@ if __name__ == '__main__':
 		list_now = get_instances()
 		list_now.remove('default')
 		if list_prev != list_now:
-			print('deference detected.')
+			#print('deference detected.')
 			if len(list_now) > len(list_prev):
 				start_them = list(set(list_now) - set(list_prev))
 				print('start them:', start_them)

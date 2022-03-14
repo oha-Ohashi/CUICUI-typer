@@ -1,5 +1,6 @@
-import time
+import time, threading
 import myjson
+import bot
 
 def incliment_local_phase(itc_dict, path):
 	res = 0
@@ -49,10 +50,24 @@ def incliment_global_phase(itc_dict):
 		itc_dict['global-phase'] += 1
 	return itc_dict
 	
+def detect_bot(itc_dict, path):
+	for i, p in enumerate(itc_dict['players']):
+		# botフラグを拾う
+		if p['bot']:
+			print(p['name'] + " emerged!")
+			thread = threading.Thread(
+				target=bot.bot_life, 
+				args=(path, p['name'],)
+			)
+			thread.start()
+			# botフラグを切る
+			itc_dict['players'][i]['bot'] = False
+	myjson.dict_to_json(path,itc_dict)
 
 
 def anychange(itc_dict, path):
-	print("any change")
+	#print("any change")
 	incliment_local_phase(itc_dict, path)
+	detect_bot(itc_dict, path)
 	#give_some_point(itc_dict, path, which_one_passed)
 

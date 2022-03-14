@@ -2,6 +2,10 @@ import json
 import time
 import glob, os, shutil
 from . import myjson
+import random
+random.seed(0)
+
+
 def generate_res(param):
 	res = "(server)default response."
 	# パラメーターを列挙
@@ -53,7 +57,10 @@ def generate_res(param):
 		itc_path = myjson.path_itc(param[1])
 		itc_dict = myjson.json_to_dict(itc_path)
 		bot = myjson.json_to_dict('./cuicui/data/bot.json')
-		bot_name = "bot-Lv" + str(param[2])
+		#bot_tag = "#"+ str(random.randint(0,9999))
+		# 123.45秒→12345
+		bot_tag = "#"+ str(int((time.time() * 100) % 100000))
+		bot_name = "bot-Lv" + str(param[2]) + bot_tag
 		bot["name"] = bot_name
 		bot["level"] = param[2]
 		itc_dict["players"].append(bot)
