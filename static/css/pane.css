@@ -27,7 +27,7 @@ body{
 */
 .user-input{
 	color: #eee;
-	background-color: #3f3f3f;
+	background-color: #3f3f3f00;
 	caret-color: pink;
 	/*caret-shape: block;*/
 	border: none;

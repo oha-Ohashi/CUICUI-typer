@@ -24,6 +24,16 @@ $(document).keyup(function(e){
 		$(".input-shita")
 	];
 });
+
+$("#p2").click((e) => {
+	input_switch = false;
+	$(".input-ue").last().focus();
+});
+$("#p3").click((e) => {
+	input_switch = true;
+	$(".input-shita").last().focus();
+});
+
 elms_input[0].last().click((e)=>{
 	input_switch = false;
 });

@@ -1,8 +1,11 @@
 $(() => {
-	if(localStorage.getItem("name_CUICUI") == null){
-		p0_respond("\"助けて\" をタイプしてコマンドを表示");
+	if(localStorage.getItem("name") == null){
+		p0_respond("`助けて` をタイプしてコマンドを表示");
 	}else{
-		p0_respond("ようこそ、" + localStorage.getItem("name_CUICUI"));
+		p0_respond(
+			"ようこそ、" + localStorage.getItem("name") +
+			"<br>`助けて` をタイプしてコマンドを表示"
+		);
 	}
 });
 
@@ -17,7 +20,7 @@ function process_0(input){
 		console.log(split_input[1]);
 		if(split_input[1] !== undefined && split_input[1] !== ""){
 			if(split_input[1].length <= 16){
-				localStorage.setItem("name_CUICUI", split_input[1]);
+				localStorage.setItem("name", split_input[1]);
 				p0_respond("お名前が登録されました。");
 			}else{
 				p0_respond("お名前は16文字以内でお願いします。");
@@ -43,13 +46,13 @@ function process_0(input){
 		if(split_input[1] !== undefined && split_input[1] !== ""){
 			var ajax_res = myajax({
 				arg1:"join", arg2: split_input[1], 
-				arg3: localStorage.getItem("name_CUICUI")
+				arg3: localStorage.getItem("name")
 			});
 			if(ajax_res.includes("[成功]")){
 				p0_respond(ajax_res);
 				shita_start();
 			}else{
-				p0_respond("なんか失敗しました。");
+				p0_respond(ajax_res);
 			}
 		}else{
 			p0_respond("第2引数にインスタンス名を入力してください。")
@@ -59,7 +62,7 @@ function process_0(input){
 	}else if (split_input[0] == "clear"){
 		p0_respond(myajax({arg1:"clear"}));
 	}else if(split_input[0] == "rem"){
-		localStorage.removeItem("name_CUICUI");
+		localStorage.removeItem("name");
 		p0_respond("removed name");
 	}else{
 		p0_respond("そのようなコマンドはありません。");
@@ -102,16 +105,21 @@ function myajax(paras){
 function p0_respond(arg_text){
 	var response_div = $('<div>'+arg_text+'</div>');
 	var input_div = $('<div>');
-	var stored_name = localStorage.getItem("name_CUICUI");
+	var stored_name = localStorage.getItem("name");
 	if(stored_name == null){stored_name = "Unknown";}
 	var input_div_name = $('<span>', {class:'green-name', text: stored_name});
 	var input_div_input = $('<input>', {class: 'user-input input-ue'})
+
+	input_div_input.click((e)=>{
+		input_switch = false;
+	});
 	input_div_input.keydown((e) => {
 		if(e.key == "Enter"){
-			var input = elms_input[0].last().val();
+			var input = input_div_input.val();
 			process_0(input);
 		}
 	});
+
 	input_div.append(input_div_name);
 	input_div.append(": ");
 	input_div.append(input_div_input);

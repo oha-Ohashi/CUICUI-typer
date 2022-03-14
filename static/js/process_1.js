@@ -19,6 +19,7 @@ function process_1(input){
 function shita_start(){
 	localStorage.setItem("instance", split_input[1])
 	p1_respond(
+		"Tabでいつでもコマンド入力エリアに戻れます。<br>"+
 		"｢準備完了｣とタイプして、Ctrl+Enterを押してください。",
 		""
 	);
@@ -27,13 +28,28 @@ function shita_start(){
 function p1_respond(odai_text, disp_text){
 	var odai_div = $('<div>'+odai_text+'</div>');
 	var input_div = $('<input>', {class: 'user-input input-shita'})
+
+	input_div.last().click((e)=>{
+		input_switch = true;
+	});
 	input_div.keydown((e) => {
 		if(e.ctrlKey == true && e.key == "Enter"){
-			var input = elms_input[1].last().val();
-			elms_input[1].last().val("");
+			var input = input_div.val();
+			input_div.val("");
 			process_1(input);
 		}
 	});
+	input_div.keyup((e) => {
+		var input = input_div.val();
+		myajax({
+			arg1:"wip", 
+			arg2: localStorage.getItem("instance"), 
+			arg3: localStorage.getItem("name"), 
+			arg4: input
+		});
+		console.log("途中: "+ input);
+	});
+
 	var disp_div = $('<div>'+disp_text+'</div>')
 
 	$("#p3").empty();

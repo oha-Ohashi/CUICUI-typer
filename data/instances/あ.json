@@ -1,16 +1,12 @@
 {
   "alive": true,
   "goal": "任意の日本語の文章",
-  "players": {
-    "あ": {
-      "ready": false,
-      "score": 1,
-      "work": ""
-    },
-    "い": {
+  "players": [
+    {
+      "name": "オオハシ",
       "ready": false,
       "score": 0,
-      "work": ""
+      "wip": ""
     }
-  }
+  ]
 }
