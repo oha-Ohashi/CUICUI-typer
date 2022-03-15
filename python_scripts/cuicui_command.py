@@ -66,7 +66,7 @@ def generate_res(param):
 		itc_dict["players"].append(bot)
 		myjson.dict_to_json(itc_path, itc_dict)
 		res = bot_name + "が参加しました。<br>"
-		time.sleep(0.5)
+		#time.sleep(0.5)
 
 	if param[0] == "wip":	#1:instance 2:name 3:input
 		player_property_update(param[1], param[2], ["wip", param[3]])

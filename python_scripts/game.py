@@ -31,9 +31,9 @@ def give_some_point(itc_dict, which_one_passed):
 	#print("position: ", position)
 
 	#ポイント加算
-	point_list = [0,100,50]
-	if position > 2:  #メンバーが多かった時に切る
-		position = 2
+	point_list = [0,100,75,50,25,0]
+	if position > 5:  #メンバーが多かった時に切る
+		position = 5
 	itc_dict['players'][which_one_passed]['score'] += point_list[position]
 	#myjson.dict_to_json(path, itc_dict)
 	return itc_dict

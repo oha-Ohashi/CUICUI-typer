@@ -7,8 +7,8 @@ class Bot():
 		self.path = path
 		self.bot_name = bot_name
 		self.bot_level = int(bot_level) - 1
-		self.delay_head = [7,7,6,5,4, 3,2,2,2,2]
-		self.delay_mean = [4,3,3,2,2,  1.5,1.0,0.7,0.5,0.3]
+		self.delay_head = [7,7,6,5,4, 3,2,2,2,1]
+		self.delay_mean = [4,3,3,2,2,  1.5,1.0,0.7,0.3,0.3]
 
 	def get_player_dict(self):
 		itc_dict = myjson.json_to_dict(self.path)
@@ -46,9 +46,10 @@ class Bot():
 			self.put_player_dict(pl_dict)
 			time.sleep(self.randomize(
 				self.delay_mean[self.bot_level]
+				
 			))
 	def randomize(self, span):
-		proportion = 0.5
+		proportion = 0.3
 		minimum = span - (span * proportion)
 		maximum = span + (span * proportion)
 		return random.uniform(minimum, maximum)

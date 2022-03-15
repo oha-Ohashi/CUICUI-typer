@@ -7,7 +7,7 @@ def path_itc(arg):
 def json_to_dict(path):
 	#while(myread(path) == ""):
 		#print("|", end='')
-	while True:
+	for i in range(20):
 		try:
 			res = json.loads(myread(path))
 			return res
@@ -15,6 +15,7 @@ def json_to_dict(path):
 		except:
 			print("myjson.pyでjson.loadsに失敗。")
 			time.sleep(0.05)
+	print("myjson.pyにて20回失敗、諦めた.")
 	#return json.loads(myread(path))
 
 def dict_to_json(path, data):
