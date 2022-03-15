@@ -1,0 +1,13 @@
+{
+  "itc_name": "a",
+  "json_path": "./cuicui/data/instances/a.json",
+  "alive": false,
+  "thread": [
+    "a",
+    "b",
+    "c"
+  ],
+  "clock": 9.5,
+  "global-phase": 0,
+  "players": []
+}

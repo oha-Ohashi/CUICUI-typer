@@ -5,19 +5,26 @@ from . import myjson
 import random
 random.seed(0)
 
+from . import gameinstance
+itc_store = []
+
 
 def generate_res(param):
 	res = "(server)default response."
 	# パラメーターを列挙
 	for i in range(len(param)):
 		print(i, end=":")
-		print(param[i], end='  ')
+		print(param[i], end='(')
+		print(type(param[i]), end=')  ')
 	print()
+
+	if param[0] == "name":
+		if type(param[1]) is str and len(param[1]) > 0 and len(param[1]) < 16:
+			res = "お名前設定:"+ param[1]
 
 	if param[0] == "view":
 		res = ""
-		itc_list = get_instances()
-		itc_list.remove("default")
+		itc_list = get_itc_names()
 		if len(itc_list) == 0:
 			res = "既存インスタンスがありません。新規作成してください。"
 		else:
@@ -26,32 +33,31 @@ def generate_res(param):
 				res += itc_list[i] + "<br>"
 
 	if param[0] == "create":
-		itc_list = get_instances()
-		if not param[1] in itc_list:
-			shutil.copy(
-				'./cuicui/data/instances/default.json',
-				'./cuicui/data/instances/'+ param[1] +'.json'
-			)
-			res = "対戦インスタンス `"+ param[1] +" `が無事開かれました。"
-			res += "<br>1分間インスタンス情報の更新がない場合、インスタンスは自動的に削除されます。"
-		else:
-			res = "すでに同名のインスタンスがあります。"
-
-	if param[0] == "join":
-		itc_list = get_instances()
-		if param[1] in itc_list:
-			itc_path = myjson.path_itc(param[1])
-			itc_dict = myjson.json_to_dict(itc_path)
-			player = myjson.json_to_dict('./cuicui/data/player.json')
-			if not iru(itc_dict=itc_dict, name=param[2]):
-				player["name"] = param[2]
-				itc_dict['players'].append(player)
-				myjson.dict_to_json(itc_path, itc_dict)
-				res = "[成功]インスタンス`"+param[1]+"`に新しく参加しました。<br>`助けてい`:インスタンス操作のコマンドを見る"
+		itc_list = get_itc_names()
+		if type(param[1]) is str and len(param[1]) > 0 and len(param[1]) <= 16:
+			if not param[1] in itc_list:
+				#インスタンスを追加 
+				game = gameinstance.Game(param[1])
+				itc_store.append(game)
+				game.start_tick()
+				game.start_write()    ######本番では消す########
+				res = "対戦インスタンス `"+ param[1] +" `が無事開かれました。"
+				res += "<br>1分間インスタンス情報の更新がない場合、インスタンスは自動的に削除されます。"
 			else:
-				res = "[成功]インスタンス`"+param[1]+"`に移動しました。<br>`助けてい`:インスタンス操作のコマンドを見る"
+				res = "すでに同名のインスタンスがあります。"
 		else:
-			res = param[1] + ": そのようなインスタンスはありません。"
+			res = "コマンドが不正です。"
+
+	# 0:join 1:game 2:name
+	if param[0] == "join":
+		if type(param[1]) is str and type(param[2]) is str:
+			game = pick_an_instance(param[1])
+			if game != 0:
+				res = game.add_player(param[2])
+			else:
+				res = param[1] + ": そのようなインスタンスはありません。"
+		else: 
+			res = "コマンドが不正です。"
 	
 	if param[0] == "bot": # 1:instance 2:level
 		itc_path = myjson.path_itc(param[1])
@@ -78,28 +84,25 @@ def generate_res(param):
 		res = "(サーバー)これはてすとだよ"
 	if param[0] == "clear":
 		clear_instances()
+		res = "[裏コマ]インスタンス全消ししたで"
 
 	return res
 
 
-def get_instances():
-	res = []
-	for path in glob.glob('./cuicui/data/instances/*.json'):
-		basename_without_ext = os.path.splitext(os.path.basename(path))[0]
-		res.append(basename_without_ext)
-	#print(res)
+def get_itc_names():
+	res = list(map(lambda e:e.data['itc_name'], itc_store))
 	return res
+def pick_an_instance(name):
+	for x in itc_store:
+		if x.data['itc_name'] == name:
+			return x
+	return -1
 
 def clear_instances():
-	itc_list = get_instances()
-	itc_list.remove("default")
-	for item in itc_list:
-		itc_path = myjson.path_itc(item)
-		itc_dict = myjson.json_to_dict(itc_path)
-		itc_dict['alive'] = False
-		myjson.dict_to_json(itc_path, itc_dict)
-		time.sleep(1)
-		os.remove(itc_path)
+	global itc_store
+	for i in range(len(itc_store)):
+		itc_store[i].kill()
+		del itc_store[i]
 	
 def iru(itc_dict, name):
 	res = False

@@ -9,6 +9,25 @@ $(() => {
 	}
 });
 
+function process_0_new(input){
+	split_input = input.replaceAll("　", "").split(" ");
+	console.log("command array:" + split_input);
+	var ajax_res = myajax({
+		arg1: split_input[0],
+		arg2: split_input[1],
+		arg3: localStorage.getItem("name_CUICUI"),
+		arg4: localStorage.getItem("instance")
+	});
+	if(ajax_res.includes("お名前設定")){
+		var name = ajax_res.split(":")[1];
+		localStorage.setItem("name_CUICUI", name);
+	}else if(ajax_res.includes("[成功]")){
+		var instance = ajax_res.split(":")[1];
+		localStorage.setItem("instance", instance);
+	}
+	p0_respond(ajax_res);
+}
+
 function process_0(input){
 	split_input = input.replaceAll("　", " ").split(" ");
 	console.log("process_0:" + split_input);
@@ -95,6 +114,7 @@ function process_0(input){
 		p0_respond("そのようなコマンドはありません。");
 	}
 }
+
 const help_text = [
 	[
 		"名前 `名前`: ユーザーネームを`名前`に設定",
@@ -154,7 +174,7 @@ function p0_respond(arg_text){
 	input_div_input.keydown((e) => {
 		if(e.key == "Enter"){
 			var input = input_div_input.val();
-			process_0(input);
+			process_0_new(input);
 		}
 	});
 
