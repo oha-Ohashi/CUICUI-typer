@@ -14,7 +14,7 @@ class Watcher:
 		while(myjson.json_to_dict(self.itc_path)["alive"]):
 			itc_dict_now = myjson.json_to_dict(self.itc_path)
 			if(itc_dict_now != itc_dict_prev):
-				time.sleep(0.1)
+				#time.sleep(0.1)
 				game.anychange(itc_dict_now, path=self.itc_path)
 				#print(itc_dict_now)
 			itc_dict_prev = itc_dict_now
