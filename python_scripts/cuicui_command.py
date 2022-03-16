@@ -1,7 +1,6 @@
 import json
 import time
 import glob, os, shutil
-from . import myjson
 import random
 random.seed(0)
 
