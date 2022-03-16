@@ -24,7 +24,7 @@ function shita_start(){
 	}, 0);
 }
 
-let sound_enter = new Audio("https://github.com/oha-Ohashi/cuicui/blob/main/sound/enter1.mp3?raw=true");
+let sound_enter = new Audio("https://github.com/oha-Ohashi/cuicui/blob/main/media/enter1.mp3?raw=true");
 
 function p1_respond(odai_text, disp_text){
 	var odai_div = $('<div id="odai">'+odai_text+'</div>');
