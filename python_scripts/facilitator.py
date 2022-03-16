@@ -11,7 +11,8 @@ def incliment_local_phase(game):
 				p['local-phase'] += 1
 				incliment_global_phase(game)
 		elif p['local-phase'] == len(game.data['thread']) - 1:
-			print(p['name'], "打ち終わり")
+			#print(p['name'], "打ち終わり")
+			pass
 		else:
 			if p['wip'] == game.data['thread'][p['local-phase']]:
 				p['local-phase'] += 1

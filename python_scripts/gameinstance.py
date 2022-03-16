@@ -1,7 +1,7 @@
 import json
 import time
 import threading
-from . import facilitator
+from . import facilitator, bot
 
 
 class Game():
@@ -9,10 +9,15 @@ class Game():
 		self.data = {
 			"itc_name": itc_name,
 			"json_path": "./cuicui/data/instances/"+itc_name+".json",
+			"thread": [
+				"｢準備完了｣とタイプしてそのままお待ちください。<br>Enterを押すと入力内容がリセットされます。",
+				"あいうえお",
+				"かきくけこ",
+				"[対戦終了]お疲れさまでした。<br>F5キーで退出してください。"
+			],
 			"alive": True,
-			"thread": ['a','b','c'],
 			"clock": 0,
-			"time": 0,
+			"footprint": time.time(),
 			"global-phase": 0,
 			"players":[]
 		}
@@ -44,6 +49,11 @@ class Game():
 			"wip": ""
 		}
 		self.data['players'].append(player_dict)
+		thread = threading.Thread(
+			target=bot.bot_life,
+			args=(self, player_dict,)
+		)
+		thread.start()
 		return bot_name + "が参加しました。<br>"
 		
 	def start_tick(self):
@@ -53,7 +63,6 @@ class Game():
 		while self.data['alive']:
 			time.sleep(0.5)
 			self.data['clock'] += 0.5
-			self.data['time'] += time.time()
 		print("incliment done")
 	
 	def start_facilitator(self):
@@ -65,6 +74,8 @@ class Game():
 			#facilitator.printit(self)
 			facilitator.incliment_local_phase(self)
 
+	def footprint(self):
+		self.data['footprint'] = time.time()
 	def kill(self):
 		self.data['alive'] = False
 

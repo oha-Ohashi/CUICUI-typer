@@ -40,10 +40,13 @@ def generate_res(param):
 			if not param[1] in itc_list:
 				#インスタンスを追加 
 				game = gameinstance.Game(param[1])
+				if len(itc_store) > 1000:
+					itc_store.pop(0)
 				itc_store.append(game)
 				game.start_tick()
 				game.start_facilitator()
-				game.start_write()    ######本番では消す########
+				if game.data['itc_name'] == "a":
+					game.start_write()  
 				res = "対戦インスタンス `"+ param[1] +" `が無事開かれました。"
 				res += "<br>1分間インスタンス情報の更新がない場合、インスタンスは自動的に削除されます。"
 			else:
@@ -81,6 +84,7 @@ def generate_res(param):
 		#print(game)
 		player = pick_an_player(param[2], game)
 		player['wip'] = param[1]
+		game.footprint()	     	########footprint#########
 	if param[0] == "sync":	#1:None 2:name 3:instance
 		li = create_odai_and_disp(param[3], param[2])
 		res = '\\'.join(li)
@@ -91,6 +95,8 @@ def generate_res(param):
 		clear_instances()
 		res = "[裏コマ]インスタンス全消ししたで"
 
+	if not param[0] in ["wip", "sync"]:
+		remove_old_instances()
 	return res
 
 
@@ -139,3 +145,15 @@ def create_disp(game):
 		res += "score "+  str(p['score']) + ": " + p['name'] + "<br>"
 		res += "&ensp;" + p['wip'] + "<br>"
 	return res
+
+def remove_old_instances():
+	print("remove old ones")
+	old_list = list(filter(
+		lambda game:time.time() - game.data['footprint'] > 60*5, 
+		itc_store
+	))
+	print("itc_store:", itc_store)
+	print("old_list:", old_list)
+	for old_item in old_list:
+		old_item.kill()
+		itc_store.remove(old_item)

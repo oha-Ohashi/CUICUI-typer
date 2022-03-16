@@ -11,7 +11,8 @@ def incliment_local_phase(itc_dict, path):
 				# global phase 上げ
 				itc_dict = incliment_global_phase(itc_dict)
 		elif(p['local-phase'] == len(itc_dict['thread']) -1 ):
-			print("打ち終わり")
+			#print("打ち終わり")
+			pass
 		# 最初でも最後でもない、採点対処のタイプ
 		else:
 			res = i
