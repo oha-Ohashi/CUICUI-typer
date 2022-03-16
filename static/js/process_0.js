@@ -15,15 +15,16 @@ function process_0_new(input){
 	var ajax_res = myajax({
 		arg1: split_input[0],
 		arg2: split_input[1],
-		arg3: localStorage.getItem("name_CUICUI"),
+		arg3: localStorage.getItem("name"),
 		arg4: localStorage.getItem("instance")
 	});
 	if(ajax_res.includes("お名前設定")){
 		var name = ajax_res.split(":")[1];
-		localStorage.setItem("name_CUICUI", name);
+		localStorage.setItem("name", name);
 	}else if(ajax_res.includes("[成功]")){
 		var instance = ajax_res.split(":")[1];
 		localStorage.setItem("instance", instance);
+		shita_start();
 	}
 	p0_respond(ajax_res);
 }
@@ -158,6 +159,24 @@ function myajax(paras){
 		}
 	).responseText
 	return res;
+}
+
+function speedtest(bool){
+	var mae = new Date().getTime();
+	for (var i=0; i<100; i++){
+		if (bool){
+			myajax({
+				arg1: "sync",
+				arg3: "Ohashi",
+				arg4: "a"
+			});
+		}else{
+			myajax({arg1: "test"});
+		}
+	}
+	var ato = new Date().getTime();
+	console.log((ato - mae)/1000);
+	console.log(100/(ato - mae)*1000);
 }
 
 function p0_respond(arg_text){

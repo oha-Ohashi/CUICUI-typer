@@ -40,45 +40,47 @@ def generate_res(param):
 				game = gameinstance.Game(param[1])
 				itc_store.append(game)
 				game.start_tick()
-				game.start_write()    ######本番では消す########
+				#game.start_write()    ######本番では消す########
 				res = "対戦インスタンス `"+ param[1] +" `が無事開かれました。"
 				res += "<br>1分間インスタンス情報の更新がない場合、インスタンスは自動的に削除されます。"
 			else:
 				res = "すでに同名のインスタンスがあります。"
 		else:
-			res = "コマンドが不正です。"
+			res = "コマンドまたはインスタンス名が不正です。"
 
-	# 0:join 1:game 2:name
+	# 0:'join' 1:game 2:name
 	if param[0] == "join":
-		if type(param[1]) is str and type(param[2]) is str:
-			game = pick_an_instance(param[1])
-			if game != 0:
-				res = game.add_player(param[2])
+		if type(param[1]) is str:
+			if(len(param[2]) > 0):
+				game = pick_an_instance(param[1])
+				if game != -1:
+					res = game.add_player(param[2])
+				else:
+					res = param[1] + ": そのようなインスタンスはありません。"
 			else:
-				res = param[1] + ": そのようなインスタンスはありません。"
+				res = "プレイするにはお名前を登録してください。"
 		else: 
 			res = "コマンドが不正です。"
 	
-	if param[0] == "bot": # 1:instance 2:level
-		itc_path = myjson.path_itc(param[1])
-		itc_dict = myjson.json_to_dict(itc_path)
-		bot = myjson.json_to_dict('./cuicui/data/bot.json')
-		#bot_tag = "#"+ str(random.randint(0,9999))
-		# 123.45秒→12345
-		bot_tag = "#"+ str(int((time.time() * 100) % 100000))
-		bot_name = "bot-Lv" + str(param[2]) + bot_tag
-		bot["name"] = bot_name
-		bot["level"] = param[2]
-		itc_dict["players"].append(bot)
-		myjson.dict_to_json(itc_path, itc_dict)
-		res = bot_name + "が参加しました。<br>"
-		#time.sleep(0.5)
+	# 0:'bot' 1:level 2:name 3:instance
+	if param[0] == "bot":
+		if int(param[1]) in list(range(1,11)):
+			game = pick_an_instance(param[3])
+			if game != -1:
+				res = game.add_bot(param[1])    ### botを追加
+			else:
+				res = "botを追加するにはインスタンスに参加してください。"
+		else:
+			res = "コマンドが不正です。"
 
-	if param[0] == "wip":	#1:instance 2:name 3:input
-		player_property_update(param[1], param[2], ["wip", param[3]])
-	if param[0] == "sync":	#1:instance 2:name
-		li = create_odai_and_disp(param[1], param[2])
-		res = ','.join(li)
+	if param[0] == "wip":	#1:input 2:name 3:instance
+		game = pick_an_instance(param[3])
+		print(game)
+		#player = pick_an_player(param[2], game)
+		#player['wip'] = param[1]
+	if param[0] == "sync":	#1:None 2:name 3:instance
+		li = create_odai_and_disp(param[3], param[2])
+		res = ':'.join(li)
 			
 	if param[0] == "test":
 		res = "(サーバー)これはてすとだよ"
@@ -97,12 +99,18 @@ def pick_an_instance(name):
 		if x.data['itc_name'] == name:
 			return x
 	return -1
+def pick_an_player(name, game):
+	for p in game.data['players']:
+		if p['name'] == name:
+			return p
+	return -1
 
 def clear_instances():
 	global itc_store
-	for i in range(len(itc_store)):
-		itc_store[i].kill()
-		del itc_store[i]
+	for game in itc_store:
+		game.kill()
+		itc_store.remove(game)
+		#del itc_store[i]
 	
 def iru(itc_dict, name):
 	res = False
@@ -111,7 +119,7 @@ def iru(itc_dict, name):
 			res = True
 	return res
 
-def player_property_update(instance, name, key_and_value):
+'''def player_property_update(instance, name, key_and_value):
 	for item in get_instances():
 		if item ==  instance:
 			itc_path = myjson.path_itc(instance)
@@ -122,7 +130,8 @@ def player_property_update(instance, name, key_and_value):
 
 			myjson.dict_to_json(itc_path, itc_dict)
 	print(key_and_value)
-
+	'''
+'''
 def create_odai_and_disp(instance, name):
 	res = ["<br>", "<br><br><br>"]
 	for item in get_instances():
@@ -133,11 +142,22 @@ def create_odai_and_disp(instance, name):
 			for i, p in enumerate(itc_dict['players']):
 				if p['name'] == name:
 					res[0] += itc_dict['thread'][itc_dict['global-phase']]
-	return res
+'''
+def create_odai_and_disp(itc_name, name):
+	res = ["<br>", "<br><br><br>"]
+	game = pick_an_instance(itc_name)
+	if game != -1:
+		#print(json.dumps(game.data))
+		res[1] += create_disp(game)
+		player = pick_an_player(name, game)
+		res[0] += game.data['thread'][game.data['global-phase']]
+		return res
+	return ["こりゃ","だめだ"]
 
-def create_disp(itc_dict):
+def create_disp(game):
 	res = ""
-	for i, p in enumerate(itc_dict['players']):
+	###################ここに得点順のソートをそーにゅう###########
+	for p in game.data['players']:
 		#res += p['name'] + ": score " + str(p['score']) + "<br>"
 		res += "score "+  str(p['score']) + ": " + p['name'] + "<br>"
 		res += "&ensp;" + p['wip'] + "<br>"

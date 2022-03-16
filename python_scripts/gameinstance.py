@@ -11,6 +11,7 @@ class Game():
 			"alive": True,
 			"thread": ['a','b','c'],
 			"clock": 0,
+			"time": 0,
 			"global-phase": 0,
 			"players":[]
 		}
@@ -42,6 +43,7 @@ class Game():
 			"wip": ""
 		}
 		self.data['players'].append(player_dict)
+		return bot_name + "が参加しました。<br>"
 		
 	def start_tick(self):
 		thread = threading.Thread(target=self.tick)
@@ -50,6 +52,7 @@ class Game():
 		while self.data['alive']:
 			time.sleep(0.5)
 			self.data['clock'] += 0.5
+			self.data['time'] += time.time()
 		print("incliment done")
 
 	def kill(self):
