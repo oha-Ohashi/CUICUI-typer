@@ -12,11 +12,13 @@ itc_store = []
 def generate_res(param):
 	res = "(server)default response."
 	# パラメーターを列挙
+	'''
 	for i in range(len(param)):
 		print(i, end=":")
 		print(param[i], end='(')
 		print(type(param[i]), end=')  ')
 	print()
+	'''
 
 	if param[0] == "name":
 		if type(param[1]) is str and len(param[1]) > 0 and len(param[1]) < 16:
@@ -40,7 +42,8 @@ def generate_res(param):
 				game = gameinstance.Game(param[1])
 				itc_store.append(game)
 				game.start_tick()
-				#game.start_write()    ######本番では消す########
+				game.start_facilitator()
+				game.start_write()    ######本番では消す########
 				res = "対戦インスタンス `"+ param[1] +" `が無事開かれました。"
 				res += "<br>1分間インスタンス情報の更新がない場合、インスタンスは自動的に削除されます。"
 			else:
@@ -75,12 +78,12 @@ def generate_res(param):
 
 	if param[0] == "wip":	#1:input 2:name 3:instance
 		game = pick_an_instance(param[3])
-		print(game)
-		#player = pick_an_player(param[2], game)
-		#player['wip'] = param[1]
+		#print(game)
+		player = pick_an_player(param[2], game)
+		player['wip'] = param[1]
 	if param[0] == "sync":	#1:None 2:name 3:instance
 		li = create_odai_and_disp(param[3], param[2])
-		res = ':'.join(li)
+		res = '\\'.join(li)
 			
 	if param[0] == "test":
 		res = "(サーバー)これはてすとだよ"
@@ -92,7 +95,7 @@ def generate_res(param):
 
 
 def get_itc_names():
-	res = list(map(lambda e:e.data['itc_name'], itc_store))
+	res = list(map(lambda p: p.data['itc_name'], itc_store))
 	return res
 def pick_an_instance(name):
 	for x in itc_store:
@@ -119,35 +122,10 @@ def iru(itc_dict, name):
 			res = True
 	return res
 
-'''def player_property_update(instance, name, key_and_value):
-	for item in get_instances():
-		if item ==  instance:
-			itc_path = myjson.path_itc(instance)
-			itc_dict = myjson.json_to_dict(itc_path)
-			for i, p in enumerate(itc_dict['players']):
-				if p['name'] == name:
-					itc_dict['players'][i][key_and_value[0]] = key_and_value[1]			
-
-			myjson.dict_to_json(itc_path, itc_dict)
-	print(key_and_value)
-	'''
-'''
-def create_odai_and_disp(instance, name):
-	res = ["<br>", "<br><br><br>"]
-	for item in get_instances():
-		if item == instance:
-			itc_path = myjson.path_itc(instance)
-			itc_dict = myjson.json_to_dict(itc_path)
-			res[1] += create_disp(itc_dict)
-			for i, p in enumerate(itc_dict['players']):
-				if p['name'] == name:
-					res[0] += itc_dict['thread'][itc_dict['global-phase']]
-'''
 def create_odai_and_disp(itc_name, name):
 	res = ["<br>", "<br><br><br>"]
 	game = pick_an_instance(itc_name)
 	if game != -1:
-		#print(json.dumps(game.data))
 		res[1] += create_disp(game)
 		player = pick_an_player(name, game)
 		res[0] += game.data['thread'][game.data['global-phase']]
@@ -158,7 +136,6 @@ def create_disp(game):
 	res = ""
 	###################ここに得点順のソートをそーにゅう###########
 	for p in game.data['players']:
-		#res += p['name'] + ": score " + str(p['score']) + "<br>"
 		res += "score "+  str(p['score']) + ": " + p['name'] + "<br>"
 		res += "&ensp;" + p['wip'] + "<br>"
 	return res

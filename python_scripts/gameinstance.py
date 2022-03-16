@@ -1,6 +1,7 @@
 import json
 import time
 import threading
+from . import facilitator
 
 
 class Game():
@@ -17,7 +18,7 @@ class Game():
 		}
 
 	def add_player(self, name):
-		existing = list(map(lambda e:e['name'], self.data['players']))
+		existing = list(map(lambda p: p['name'], self.data['players']))
 		if not name in existing:
 			player_dict = {
 				"name": name,
@@ -54,6 +55,15 @@ class Game():
 			self.data['clock'] += 0.5
 			self.data['time'] += time.time()
 		print("incliment done")
+	
+	def start_facilitator(self):
+		thread = threading.Thread(target=self.facilitator)
+		thread.start()
+	def facilitator(self):
+		while self.data['alive']:
+			time.sleep(0.01)
+			#facilitator.printit(self)
+			facilitator.incliment_local_phase(self)
 
 	def kill(self):
 		self.data['alive'] = False

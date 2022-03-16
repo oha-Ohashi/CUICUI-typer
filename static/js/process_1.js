@@ -74,8 +74,8 @@ function p1_sync(){
 		arg4: localStorage.getItem("instance")
 	});
 	//console.log(res);
-	var odai_text = res.split(':')[0];
-	var disp_text = res.split(':')[1];
+	var odai_text = res.split('\\')[0];
+	var disp_text = res.split('\\')[1];
 	//console.log("sync!");
 	var odai_div = $('<div id="odai">'+odai_text+'</div>');
 	var disp_div = $('<div id=disp>'+disp_text+'</div>')
