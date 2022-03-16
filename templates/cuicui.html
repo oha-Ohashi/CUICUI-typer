@@ -1,9 +1,27 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<head prefix="og: http://ogp.me/ns#">
+	<!-- 共通設定 -->
+	<meta property="og:title" content="くいくいタイパー">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="表示したいページのURL（絶対パス）">
+	<meta property="og:image" content="表示したい画像のURL（絶対パス）">
+	<!-- 以下省略可能ですが、site_name, description, localeは載せたほうがいいです。 -->
+	<meta property="og:site_name" content="くいくいタイパー">
+	<meta property="og:description" content="友達とリアルタイム対戦できることがウリの、CUIライクタイピングゲーム！！">
+	<meta property="og:locale" content="ja_JP">
+	<!-- /共通設定 -->
+	<!-- Twitterの設定 -->
+	<meta name="twitter:card" content="summary">
+	<!-- 以下省略可能です。 -->
+	<meta name="twitter:site" content="@oha_oha_Ohashi">
+	<meta name="twitter:creator" content="@oha_oha_Ohashi">
+	<!-- /Twitterの設定 -->
 
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +32,7 @@
     <!-- My CSS -->
     <link href="{{ url_for('static', filename='css/pane.css') }}" rel="stylesheet">
 
-    <title>くいくいタイパー | 友達/botとリアルタイム対戦！</title>
+    <title>くいくいタイパー | 友達やbotとリアルタイム対戦！</title>
   </head>
   <body>
         <!-- <div class="container"> -->

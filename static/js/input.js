@@ -46,7 +46,7 @@ elms_input[1].last().click((e)=>{
 elms_input[0].keydown((e) => {
 	if(e.key == "Enter"){
 		var input = elms_input[0].last().val();
-		process_0(input);
+		process_0_new(input);
 	}
 });
 elms_input[1].keydown((e) => {

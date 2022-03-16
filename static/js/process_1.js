@@ -21,10 +21,10 @@ function shita_start(){
 	p1_respond(" ", " ");
 	setInterval(() => {
 		p1_sync();
-	}, 100);
+	}, 0);
 }
 
-//let sound_enter = new Audio("https://github.com/oha-Ohashi/cuicui/blob/main/sound/enter1.mp3?raw=true");
+let sound_enter = new Audio("https://github.com/oha-Ohashi/cuicui/blob/main/media/enter1.mp3?raw=true");
 
 function p1_respond(odai_text, disp_text){
 	var odai_div = $('<div id="odai">'+odai_text+'</div>');
@@ -40,15 +40,15 @@ function p1_respond(odai_text, disp_text){
 		var input = input_div.val();
 		myajax({
 			arg1:"wip", 
-			arg2: localStorage.getItem("instance"), 
+			arg2: input,
 			arg3: localStorage.getItem("name"), 
-			arg4: input
+			arg4: localStorage.getItem("instance")
 		});
 		//console.log("途中: "+ input);
 		//console.log("おだい: "+ $("#odai").text());
 		if (input == $("#odai").text()){
 			console.log("ピコーン");
-			//sound_enter.play();
+			sound_enter.play();
 		}
 
 		if(e.key === "Enter"){
@@ -70,12 +70,12 @@ function p1_respond(odai_text, disp_text){
 function p1_sync(){
 	res = myajax({
 		arg1: "sync",
-		arg2: localStorage.getItem("instance"), 
-		arg3: localStorage.getItem("name")
+		arg3: localStorage.getItem("name"),
+		arg4: localStorage.getItem("instance")
 	});
 	//console.log(res);
-	var odai_text = res.split(',')[0];
-	var disp_text = res.split(',')[1];
+	var odai_text = res.split('\\')[0];
+	var disp_text = res.split('\\')[1];
 	//console.log("sync!");
 	var odai_div = $('<div id="odai">'+odai_text+'</div>');
 	var disp_div = $('<div id=disp>'+disp_text+'</div>')

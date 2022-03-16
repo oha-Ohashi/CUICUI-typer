@@ -9,6 +9,26 @@ $(() => {
 	}
 });
 
+function process_0_new(input){
+	split_input = input.replaceAll("　", "").split(" ");
+	console.log("command array:" + split_input);
+	var ajax_res = myajax({
+		arg1: split_input[0],
+		arg2: split_input[1],
+		arg3: localStorage.getItem("name"),
+		arg4: localStorage.getItem("instance")
+	});
+	if(ajax_res.includes("お名前設定")){
+		var name = ajax_res.split(":")[1];
+		localStorage.setItem("name", name);
+	}else if(ajax_res.includes("[成功]")){
+		var instance = ajax_res.split(":")[1];
+		localStorage.setItem("instance", instance);
+		shita_start();
+	}
+	p0_respond(ajax_res);
+}
+
 function process_0(input){
 	split_input = input.replaceAll("　", " ").split(" ");
 	console.log("process_0:" + split_input);
@@ -59,16 +79,27 @@ function process_0(input){
 		}
 	}else if(split_input[0] == "bot"){
 		const arr_10lv = [1,2,3,4,5,6,7,8,9,10];
-		const arr_3blends = ["強","中","弱"];
+		//const arr_3blends = ["強","中","弱"];
 		console.log(localStorage.getItem("instance"));
 		if(localStorage.getItem("instance") !== 'null'){
 			if(split_input[1] !== undefined && 
 				arr_10lv.indexOf(Number(split_input[1])) !== -1 ){
-				p0_respond("bot(難易度: "+Number(split_input[1])+") がインスタンスに参加しました。");
-			}else if(split_input[1] !== undefined && 
+					res = add_bot(Number(split_input[1]));
+					p0_respond(res);
+			}/*else if(split_input[1] !== undefined && 
 				arr_3blends.indexOf(split_input[1]) !== -1 ){
-				p0_respond("botが4個体追加されました("+split_input[1]+")");
-			}else{
+					res = ""
+					var omakase_map = {
+						"弱": [1,2,3,4],
+						"中": [4,5,6,7],
+						"強": [7,8,9,10]
+					}
+					omakase_map[split_input[1]].forEach((e, i) => {
+						res += add_bot(e);
+						await wait(1000);
+					});
+					p0_respond(res);
+			}*/else{
 				p0_respond("コマンドが不正です。");
 			}
 		}else{
@@ -77,8 +108,6 @@ function process_0(input){
 
 	}else if (split_input[0] == "test"){
 		p0_respond(myajax({arg1:"test"}));
-	}else if (split_input[0] == "clear"){
-		p0_respond(myajax({arg1:"clear"}));
 	}else if(split_input[0] == "rem"){
 		localStorage.removeItem("name");
 		p0_respond("removed name");
@@ -86,6 +115,7 @@ function process_0(input){
 		p0_respond("そのようなコマンドはありません。");
 	}
 }
+
 const help_text = [
 	[
 		"名前 `名前`: ユーザーネームを`名前`に設定",
@@ -95,9 +125,9 @@ const help_text = [
 	],
 	[
 		"Tabキー: コマンドエリアとタイピングエリアを往復",
-		"`bot 強`: おまかせbotブレンド4個体(強)",
+		/*"`bot 強`: おまかせbotブレンド4個体(強)",
 		"`bot 中`: おまかせbotブレンド4個体(中)",
-		"`bot 弱`: おまかせbotブレンド4個体(弱)",
+		"`bot 弱`: おまかせbotブレンド4個体(弱)",*/
 		"`bot [1-10]`: botを1個体だけ追加。レベルは10段階"
 	]
 ];
@@ -111,6 +141,13 @@ function dump_help(which){
 	return res;
 }
  
+function add_bot(level){
+	return myajax({
+		arg1:"bot", 
+		arg2: localStorage.getItem("instance"), 
+		arg3: level
+	});
+}
 
 function myajax(paras){
 	var res = $.ajax(
@@ -122,6 +159,24 @@ function myajax(paras){
 		}
 	).responseText
 	return res;
+}
+
+function speedtest(bool){
+	var mae = new Date().getTime();
+	for (var i=0; i<100; i++){
+		if (bool){
+			myajax({
+				arg1: "sync",
+				arg3: "Ohashi",
+				arg4: "a"
+			});
+		}else{
+			myajax({arg1: "test"});
+		}
+	}
+	var ato = new Date().getTime();
+	console.log((ato - mae)/1000);
+	console.log(100/(ato - mae)*1000);
 }
 
 function p0_respond(arg_text){
@@ -138,7 +193,7 @@ function p0_respond(arg_text){
 	input_div_input.keydown((e) => {
 		if(e.key == "Enter"){
 			var input = input_div_input.val();
-			process_0(input);
+			process_0_new(input);
 		}
 	});
 
@@ -149,4 +204,12 @@ function p0_respond(arg_text){
 	$("#p2").append(response_div);
 	$("#p2").append(input_div);
 	input_div_input.focus();
+}
+
+const wait = async (ms) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(); // setTimeoutの第一引数の関数として簡略化できる
+    }, ms)
+  });
 }

@@ -1,0 +1,36 @@
+{
+  "itc_name": "a",
+  "json_path": "./cuicui/data/instances/a.json",
+  "thread": [
+    "｢準備完了｣とタイプしてそのままお待ちください。<br>Enterを押すと入力内容がリセットされます。",
+    "早起きは三文の徳",
+    "覆水盆に反らず",
+    "魚心あれば水心",
+    "鶴は千年亀は万年",
+    "目には目、歯には歯",
+    "娘一人に婿八人",
+    "火のないところに煙は立たぬ",
+    "[対戦終了]お疲れさまでした。<br>F5キーで退出してください。"
+  ],
+  "alive": true,
+  "clock": 158.5,
+  "footprint": 1647420162.9204686,
+  "global-phase": 8,
+  "players": [
+    {
+      "name": "ohashi",
+      "bot": false,
+      "local-phase": 8,
+      "score": 525,
+      "wip": "火のないところに煙は立たぬ"
+    },
+    {
+      "name": "bot-Lv10#5482",
+      "bot": true,
+      "level": "10",
+      "local-phase": 8,
+      "score": 700,
+      "wip": "火のないところに煙は立たぬ"
+    }
+  ]
+}
