@@ -19,11 +19,11 @@ def generate_res(param):
 	print()
 	'''
 
-	if param[0] == "name":
+	if param[0] == "名前":
 		if type(param[1]) is str and len(param[1]) > 0 and len(param[1]) < 16:
 			res = "お名前設定:"+ param[1]
 
-	if param[0] == "view":
+	if param[0] == "一覧":
 		res = ""
 		itc_list = get_itc_names()
 		if len(itc_list) == 0:
@@ -33,7 +33,7 @@ def generate_res(param):
 				res += str(i) + ": "
 				res += itc_list[i] + "<br>"
 
-	if param[0] == "create":
+	if param[0] == "作る":
 		itc_list = get_itc_names()
 		if type(param[1]) is str and len(param[1]) > 0 and len(param[1]) <= 16:
 			if not param[1] in itc_list:
@@ -42,19 +42,20 @@ def generate_res(param):
 				if len(itc_store) > 1000:
 					itc_store.pop(0)
 				itc_store.append(game)
+				game.create_thread(7)
 				game.start_tick()
 				game.start_facilitator()
 				if game.data['itc_name'] == "a":
 					game.start_write()  
 				res = "対戦インスタンス `"+ param[1] +" `が無事開かれました。"
-				res += "<br>1分間インスタンス情報の更新がない場合、インスタンスは自動的に削除されます。"
+				res += "<br>5分間打鍵がない場合、インスタンスは自動的に削除されます。"
 			else:
 				res = "すでに同名のインスタンスがあります。"
 		else:
 			res = "コマンドまたはインスタンス名が不正です。"
 
 	# 0:'join' 1:game 2:name
-	if param[0] == "join":
+	if param[0] == "入る":
 		if type(param[1]) is str:
 			if(len(param[2]) > 0):
 				game = pick_an_instance(param[1])
@@ -90,7 +91,7 @@ def generate_res(param):
 			
 	if param[0] == "test":
 		res = "(サーバー)これはてすとだよ"
-	if param[0] == "clear":
+	if param[0] == "clearth":
 		clear_instances()
 		res = "[裏コマ]インスタンス全消ししたで"
 
