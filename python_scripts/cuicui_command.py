@@ -7,6 +7,21 @@ random.seed(0)
 from . import gameinstance
 itc_store = []
 
+help_text = [
+	[
+		"名前 `名前`: ユーザーネームを`名前`に設定",
+		"一覧: 現在開いている対戦インスタンスを表示",
+		"作る `名前`: 対戦インスタンス`名前`を作成",
+		"入る `名前`: 対戦インスタンス`名前`に入室する"
+	],
+	[
+		"Tabキー: コマンドエリアとタイピングエリアを往復",
+		"`bot 弱`: おまかせbotブレンド4個体(弱)",
+		"`bot 中`: おまかせbotブレンド4個体(中)",
+		"`bot 強`: おまかせbotブレンド4個体(強)",
+		"`bot [1-10]`: botを1個体だけ追加。レベルは10段階"
+	]
+]
 
 def generate_res(param):
 	res = "(server)default response."
@@ -19,6 +34,14 @@ def generate_res(param):
 	print()
 	'''
 
+	if param[0] == "助けて":
+		res = ""
+		for h in help_text[0]:
+			res += h + "<br>"
+	if param[0] == "助けてい":
+		res = ""
+		for h in help_text[1]:
+			res += h + "<br>"
 	if param[0] == "名前":
 		if type(param[1]) is str and len(param[1]) > 0 and len(param[1]) < 16:
 			res = "お名前設定:"+ param[1]
@@ -69,7 +92,7 @@ def generate_res(param):
 			res = "コマンドが不正です。"
 	
 	# 0:'bot' 1:level 2:name 3:instance
-	if param[0] == "bot":
+	if param[0] == "bot" and isint(param[1]):
 		if int(param[1]) in list(range(1,11)):
 			game = pick_an_instance(param[3])
 			if game != -1:
@@ -78,6 +101,20 @@ def generate_res(param):
 				res = "botを追加するにはインスタンスに参加してください。"
 		else:
 			res = "コマンドが不正です。"
+	if param[0] == "bot" and param[1] in ["弱","中","強"]:
+		res = ""
+		strength_map = [
+			[1,2,3,4],
+			[3,4,5,6],
+			[7,8,9,10]
+		]
+		sm = strength_map[["弱","中","強"].index(param[1])]
+		for s in sm:
+			game = pick_an_instance(param[3])
+			if game != -1:
+				res += game.add_bot(s)
+			else:
+				res = "botを追加するにはインスタンスに参加してください。"
 
 	if param[0] == "wip":	#1:input 2:name 3:instance
 		game = pick_an_instance(param[3])
@@ -145,6 +182,15 @@ def create_disp(game):
 		res += "score "+  str(p['score']) + ": " + p['name'] + "<br>"
 		res += "&ensp;" + p['wip'] + "<br>"
 	return res
+
+def isint(s):  # 整数値を表しているかどうかを判定
+    try:
+        int(s, 10)  # 文字列を実際にint関数で変換してみる
+    except ValueError:
+        return False
+    else:
+        return True
+
 
 def remove_old_instances():
 	print("remove old ones")
