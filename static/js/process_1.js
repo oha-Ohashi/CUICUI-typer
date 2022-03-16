@@ -19,9 +19,9 @@ function process_1(input){
 function shita_start(){
 	localStorage.setItem("instance", split_input[1])
 	p1_respond(" ", " ");
-	/*setInterval(() => {
+	setInterval(() => {
 		p1_sync();
-	}, 0);*/
+	}, 0);
 }
 
 let sound_enter = new Audio("https://github.com/oha-Ohashi/cuicui/blob/main/sound/enter1.mp3?raw=true");
