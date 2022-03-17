@@ -6,7 +6,7 @@ def printit(obj):
 def incliment_local_phase(game):
 	for p in game.data['players']:
 		if p['local-phase'] == 0:
-			if p['wip'] == "準備完了":
+			if p['wip'] == "準備完了" or p['wip'] == "ready":
 				print("\n\nででどん\n\n")
 				p['local-phase'] += 1
 				incliment_global_phase(game)

@@ -16,6 +16,7 @@ help_text = [
 	],
 	[
 		"Tabキー: コマンドエリアとタイピングエリアを往復",
+		"`リスト` [ことわざ, quotes]: ワードリストを変更",
 		"`bot 弱`: おまかせbotブレンド4個体(弱)",
 		"`bot 中`: おまかせbotブレンド4個体(中)",
 		"`bot 強`: おまかせbotブレンド4個体(強)",
@@ -65,7 +66,7 @@ def generate_res(param):
 				if len(itc_store) > 1000:
 					itc_store.pop(0)
 				itc_store.append(game)
-				game.create_thread(7)
+				game.create_thread("ことわざ", 7)
 				game.start_tick()
 				game.start_facilitator()
 				if game.data['itc_name'] == "a":
@@ -89,6 +90,18 @@ def generate_res(param):
 			else:
 				res = "プレイするにはお名前を登録してください。"
 		else: 
+			res = "コマンドが不正です。"
+		
+	# 0:'リスト' 1:which one 2:name 3:instance
+	if param[0] == "リスト":
+		if param[1] in ["ことわざ", "quotes"]:
+			game = pick_an_instance(param[3])
+			if game != -1:
+				game.create_thread(param[1], 7)
+				res = "リストを設定しました。"
+			else:
+				res = "リストを設定するにはインスタンスに参加してください。"
+		else:
 			res = "コマンドが不正です。"
 	
 	# 0:'bot' 1:level 2:name 3:instance

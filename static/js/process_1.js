@@ -1,20 +1,7 @@
 $(() => {
 	//インスタンス情報初期化
 	localStorage.setItem("instance", null);
-	localStorage.setItem("ready", false);
 });
-function process_1(input){
-	console.log("process_1:");
-	console.log(input);
-	if(
-		localStorage.getItem("instance") !== null &&
-		localStorage.getItem("ready") == false &&
-		input == "準備完了"
-	){
-		localStorage.setItem("ready", true);
-	}
-	p1_respond("[お題ゾーン]", "[プレイヤー一覧ゾーン]");
-}
 
 function shita_start(){
 	localStorage.setItem("instance", split_input[1])
