@@ -5,6 +5,10 @@ from .python_scripts import cuicui_command as cc
 app = Flask(__name__)
 app.config["JSON_AS_ASCII"] = False
 
+@app.route("/favicon.ico")
+def favicon():
+    return app.send_static_file("favicon.ico")
+
 @app.route('/')
 @app.route('/index')
 def index():
