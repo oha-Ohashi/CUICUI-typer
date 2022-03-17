@@ -1,7 +1,9 @@
 # くいくいタイパー
 
 友達とリアルタイム対戦できることがウリの、CUIライクタイピングゲーム！！
+
 [プレイはこちらから](https://www.ketcha.xyz/cuicui "くいくいタイパー")
+
 
 # 環境構築
 
@@ -12,11 +14,14 @@ python, flaskが必要です。
 このようなファイル構成を作った上、
 
 ├── server.py
+
 ├── cuicui
+
 │   ├── app.py
+
 │   └── 
 
-このように記述してください。
+server.pyにこのように記述してください。
 ```python:server.py
 from cuicui.app import app
 
