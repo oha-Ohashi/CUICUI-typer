@@ -5,8 +5,8 @@ class Bot():
 	def __init__(self, game, bot_dict):
 		self.game = game
 		self.bot_dict = bot_dict
-		self.delay_head = [7,7,6,5,4, 3,2,2,2,1]
-		self.delay_mean = [4,3,3,2,2,  1.5,1.0,0.7,0.3,0.3]
+		self.delay_head = [4,3.5,3,3,2.5,  2,1.5,1.0,0.7,0.5]
+		self.delay_mean = [3,2,1.5,1.0,0.7,  0.5,0.4,0.3,0.2,0.1]
 
 	def bot_switch(self):
 		phase = self.game.data['global-phase']
