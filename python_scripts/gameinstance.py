@@ -1,6 +1,7 @@
 import json
 import time
 import random
+random.seed()
 import threading
 from . import facilitator, bot
 

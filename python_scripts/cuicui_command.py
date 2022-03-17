@@ -190,8 +190,10 @@ def create_odai_and_disp(itc_name, name):
 
 def create_disp(game):
 	res = ""
-	###################ここに得点順のソートをそーにゅう###########
-	for p in game.data['players']:
+	players = game.data['players']
+	players_sorted = sorted(players, key=lambda x:x['score'])
+	players_sorted.reverse()
+	for p in players_sorted:
 		res += "score "+  str(p['score']) + ": " + p['name'] + "<br>"
 		res += "&ensp;" + p['wip'] + "<br>"
 	return res

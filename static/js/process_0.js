@@ -10,7 +10,7 @@ $(() => {
 });
 
 function process_0_new(input){
-	split_input = input.replaceAll("　", "").split(" ");
+	split_input = input.replaceAll("　", " ").split(" ");
 	console.log("command array:" + split_input);
 	var ajax_res = myajax({
 		arg1: split_input[0],
