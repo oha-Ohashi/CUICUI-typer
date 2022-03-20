@@ -25,6 +25,10 @@ def cuicui_command():
         param_list.append(request.args.get(x))
     return cc.generate_res(param=param_list)
 
+@app.route('/ortho_heat')
+def ortho_heat():
+    return render_template('ortho_heat.html')
+
 @app.route('/ping')
 def ping():
     return 'Hello From dev1 !!'
