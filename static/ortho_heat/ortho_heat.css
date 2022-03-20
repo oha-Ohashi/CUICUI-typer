@@ -16,11 +16,23 @@ body{
 header{
 	padding: 0.5rem;
 }
-.kojika-container {
-  /*margin: auto;*/
-  /*justify-content: center;
-  align-items: center;*/
+
+.playground{
+	position:relative;
+	width: 700px;
+	height: 500px;
+	border: solid 1px black;
+	background-color: #faf6e9;
 }
+.playground div{
+	font-size: xx-large;
+	position: absolute;
+	width: 70px;
+	height: 70px;
+	text-align: center;
+	line-height: 70px;
+}
+
 .heat-box{
 	display: block;
 	width: 700px;

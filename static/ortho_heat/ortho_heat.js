@@ -17,7 +17,6 @@ $("#create").click(() => {
 	createheatmap(layout, text);
 });
 
-
 const layouts = [
 	"QWERTYUIOP\nASDFGHJKL_\nZXCVBNM___",
 	"ABCDEFGHIJ\nKLMNOPQRST\nUVWXYZ____",

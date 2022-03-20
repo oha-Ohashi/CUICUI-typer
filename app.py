@@ -29,6 +29,10 @@ def cuicui_command():
 def ortho_heat():
     return render_template('ortho_heat.html')
 
+@app.route('/ortho_typing')
+def ortho_typing():
+    return render_template('ortho_typing.html')
+
 @app.route('/ping')
 def ping():
     return 'Hello From dev1 !!'
