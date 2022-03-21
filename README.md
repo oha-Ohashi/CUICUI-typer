@@ -8,7 +8,7 @@
 
 # How to build
 
-python, flas required.
+python and flask required.
 
 files and folders:
 
