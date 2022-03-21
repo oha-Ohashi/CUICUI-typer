@@ -43,13 +43,14 @@ class Target {
 		setTimeout(() => {
 			$(this.dom).remove();
 		}, ms_to_fall);
+
 	}
 }
 
 
 function synckeymap(){
 	var layout = $(".layout-mod textarea").val().replaceAll("\n", "");
-	console.log(layout);
+	console.log("keymap:" + layout);
 	for(var i = 0; i < 30; i++){
 		$(".key").eq(i).text(layout[i]);
 	}
@@ -67,7 +68,6 @@ function doit(){
 }
 
 $("#formRange1").change(function(){
-	console.log("hello");
 	var value = $(this).val();
 	console.log(value);
 	level = value;
@@ -91,15 +91,21 @@ $("body").keydown(function(e){
 		doit();
 	}
 	if(e.keyCode >= 65 && e.keyCode <= 90){
-		//console.log(e.key)
+		var wrong_flag = true;
 		$(".playground div").each(function(){
 			var low = $(this).text().toLowerCase();
-			console.log(low);
+			//console.log(low);
 			if(e.key == low){
 				$(this).remove();
 				score++;
+				wrong_flag = false;
 				$("#progress").text(score + "/" + n_times);
 			}
 		});
+		if(wrong_flag){
+			sound_wrong.play();
+		}else{
+			sound_click.play();
+		}
 	}
 });

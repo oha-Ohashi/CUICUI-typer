@@ -2,13 +2,6 @@ $(() => {
 	$(".layout-mod textarea").val(layouts[0]);
 	$(".text-mod textarea").val(texts[0]);
 
-
-	arr = [0,1,2,10,11,29];
-	arr.forEach(n => {
-		var y = Math.floor(n / 10);
-		var x = n % 10;
-		console.log(x, y);
-	});
 })
 
 $("#create").click(() => {
