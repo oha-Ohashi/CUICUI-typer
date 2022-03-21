@@ -8,6 +8,10 @@ var intervals = [2000,1500,1000,500,300]
 var speeds = [6000, 4000, 2500, 2000, 2000]
 
 
+let sound_click = new Audio("https://github.com/oha-Ohashi/cuicui/blob/main/media/enter1.mp3?raw=true");
+let sound_wrong = new Audio("https://github.com/oha-Ohashi/cuicui/blob/main/media/enter1.mp3?raw=true");
+let sound_failure = new Audio("https://github.com/oha-Ohashi/cuicui/blob/main/media/enter1.mp3?raw=true");
+
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
