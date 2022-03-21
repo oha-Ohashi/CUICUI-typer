@@ -1,15 +1,10 @@
-<div>links:</div>
+# Links
 <ul>
 	<li><a href="https://www.ketcha.xyz/cuicui">くいくいタイパー</a> </li>
 	<li><a href="https://www.ketcha.xyz/ortho_heat">オルソリひーと | Ortho Heat</a> </li>
 	<li><a href="https://www.ketcha.xyz/ortho_typing">オルソリふぉーる | Ortho Fall</a> </li>
 </ul>
 
-[https://www.ketcha.xyz/cuicui](https://www.ketcha.xyz/cuicui "くいくいタイパー")
-
-[オルソリひーと | Ortho Heat](https://www.ketcha.xyz/ortho_heat "オルソリひーと | Ortho Heat")
-
-[オルソリふぉーる | Ortho Fall](https://www.ketcha.xyz/ortho_typing "オルソリふぉーる | Ortho Fall")
 
 # How to build
 
