@@ -1,24 +1,19 @@
-# くいくいタイパー
+[https://www.ketcha.xyz/cuicui](https://www.ketcha.xyz/cuicui "くいくいタイパー")
+[オルソリひーと | Ortho Heat](https://www.ketcha.xyz/ortho_heat "オルソリひーと | Ortho Heat")
+[オルソリふぉーる | Ortho Fall](https://www.ketcha.xyz/ortho_typing "オルソリふぉーる | Ortho Fall")
 
-友達とリアルタイム対戦できることがウリの、CUIライクタイピングゲーム！！
+# How to build
 
-[プレイはこちらから(https://www.ketcha.xyzへ)](https://www.ketcha.xyz/cuicui "くいくいタイパー")
+python, flas required.
 
-
-# 環境構築
-
-python, flaskが必要です。
-
-[注意]このリポジトリをクローンして`app.py`を実行しただけでは動作しません！
-
-このようなファイル構成を作った上、
+files and folders:
 
 ├── server.py<br>
-├── cuicui<br>
+├── cuicui(this repository)<br>
 │   ├── app.py<br>
 │   └── <br>
 
-`server.py`にこのように記述してください。
+`server.py`
 ```python:server.py
 from cuicui.app import app
 
